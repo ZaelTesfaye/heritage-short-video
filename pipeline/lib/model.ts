@@ -27,8 +27,18 @@ export async function httpError(response: Response): Promise<HttpError> {
   return new HttpError(response.status, body, retryAfterMs);
 }
 
-/** Rate limits, timeouts, server errors and dropped connections are worth retrying. Bad requests are not. */
+/**
+ * A 429 whose limit is per day, or whose suggested wait is longer than an hour, will not clear by waiting.
+ * Retrying it only burns time, so the caller should switch model or stop.
+ */
+export function isQuotaExhausted(error: unknown): boolean {
+  if (!(error instanceof HttpError) || error.status !== 429) return false;
+  return /per day|requests per day|daily/i.test(error.body) || (error.retryAfterMs ?? 0) > 3_600_000 || /retry in \d+h/i.test(error.body);
+}
+
+/** Rate limits, timeouts, server errors and dropped connections are worth retrying. Bad requests and spent daily quotas are not. */
 export function isRetryable(error: unknown): boolean {
+  if (isQuotaExhausted(error)) return false;
   if (error instanceof HttpError) return error.status === 408 || error.status === 429 || error.status >= 500;
   if (error instanceof Error) return error.name === "TypeError" || error.name === "AbortError" || error.name === "TimeoutError";
   return false;

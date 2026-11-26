@@ -3,7 +3,11 @@
     "tts": {
       "provider": "gemini",
       "model": "gemini-3.8-flash-tts",
-      "min_interval_ms": 0
+      "fallback_models": [
+        "gemini-3.8-flash-lite-tts",
+        "gemini-2.5-flash-preview-tts"
+      ],
+      "min_interval_ms": 21000
     },
     "text": {
       "provider": "gemini",
@@ -29,14 +33,28 @@
     "vertical": {
       "width": 1080,
       "height": 1920,
-      "keyframe": { "width": 768, "height": 1344 },
-      "subtitle": { "font_size": 44, "margin_v": 400, "margin_h": 90 }
+      "keyframe": {
+        "width": 768,
+        "height": 1344
+      },
+      "subtitle": {
+        "font_size": 44,
+        "margin_v": 400,
+        "margin_h": 90
+      }
     },
     "horizontal": {
       "width": 1920,
       "height": 1080,
-      "keyframe": { "width": 1344, "height": 768 },
-      "subtitle": { "font_size": 50, "margin_v": 70, "margin_h": 160 }
+      "keyframe": {
+        "width": 1344,
+        "height": 768
+      },
+      "subtitle": {
+        "font_size": 50,
+        "margin_v": 70,
+        "margin_h": 160
+      }
     }
   },
   "retry": {
@@ -48,7 +66,12 @@
     "voice_lufs": -16,
     "music_lufs": -22,
     "music_gain_db": 0,
-    "duck": { "threshold": 0.02, "ratio": 6, "attack_ms": 300, "release_ms": 1500 },
+    "duck": {
+      "threshold": 0.02,
+      "ratio": 6,
+      "attack_ms": 300,
+      "release_ms": 1500
+    },
     "master_lufs": -14,
     "master_true_peak_db": -1,
     "music_fade_in_s": 1.5,
@@ -61,9 +84,27 @@
   },
   "pricing": {
     "_note": "List prices used only to compute a list-price EQUIVALENT in runs.jsonl. Everything in this project ran on free tiers. Sources and the date checked are in COSTS.md.",
-    "gemini-3.8-flash-tts": { "input_usd_per_mtok": 0.5, "output_usd_per_mtok": 9.0, "audio_tokens_per_second": 25 },
-    "gemini-3.8-flash": { "input_usd_per_mtok": 0.75, "output_usd_per_mtok": 3.75 },
-    "@cf/black-forest-labs/flux-2-klein-4b": { "usd_per_output_tile_512": 0.000287, "usd_per_input_tile_512": 0.000059 },
-    "@cf/black-forest-labs/flux-1-schnell": { "usd_per_tile_512": 0.0000528, "usd_per_step": 0.0001056 }
+    "gemini-3.8-flash-tts": {
+      "input_usd_per_mtok": 0.5,
+      "output_usd_per_mtok": 9,
+      "audio_tokens_per_second": 25
+    },
+    "gemini-3.8-flash": {
+      "input_usd_per_mtok": 0.75,
+      "output_usd_per_mtok": 3.75
+    },
+    "@cf/black-forest-labs/flux-2-klein-4b": {
+      "usd_per_output_tile_512": 0.000287,
+      "usd_per_input_tile_512": 0.000059
+    },
+    "@cf/black-forest-labs/flux-1-schnell": {
+      "usd_per_tile_512": 0.0000528,
+      "usd_per_step": 0.0001056
+    },
+    "gemini-3.8-flash-lite-tts": {
+      "input_usd_per_mtok": 0.5,
+      "output_usd_per_mtok": 6,
+      "audio_tokens_per_second": 25
+    }
   }
 }

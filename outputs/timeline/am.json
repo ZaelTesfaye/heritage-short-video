@@ -1,0 +1,113 @@
+{
+  "lang": "am",
+  "fps": 24,
+  "shots": [
+    {
+      "id": "s01",
+      "start_s": 0,
+      "duration_s": 6.5,
+      "frames": 156,
+      "planned_s": 6.5,
+      "narration_file": "outputs/narration/am/s01.wav",
+      "narration_start_s": 0.4,
+      "narration_s": 4.96
+    },
+    {
+      "id": "s02",
+      "start_s": 6.5,
+      "duration_s": 6.5,
+      "frames": 156,
+      "planned_s": 6.5,
+      "narration_file": "outputs/narration/am/s02.wav",
+      "narration_start_s": 6.9,
+      "narration_s": 4.94
+    },
+    {
+      "id": "s03",
+      "start_s": 13,
+      "duration_s": 8.25,
+      "frames": 198,
+      "planned_s": 7.5,
+      "narration_file": "outputs/narration/am/s03.wav",
+      "narration_start_s": 13.4,
+      "narration_s": 7.11
+    },
+    {
+      "id": "s04",
+      "start_s": 21.25,
+      "duration_s": 6.5,
+      "frames": 156,
+      "planned_s": 6.5,
+      "narration_file": "outputs/narration/am/s04.wav",
+      "narration_start_s": 21.65,
+      "narration_s": 4.81
+    },
+    {
+      "id": "s05",
+      "start_s": 27.75,
+      "duration_s": 9.041666666666666,
+      "frames": 217,
+      "planned_s": 8,
+      "narration_file": "outputs/narration/am/s05.wav",
+      "narration_start_s": 28.15,
+      "narration_s": 7.91
+    },
+    {
+      "id": "s06",
+      "start_s": 36.791666666666664,
+      "duration_s": 7.5,
+      "frames": 180,
+      "planned_s": 7.5,
+      "narration_file": "outputs/narration/am/s06.wav",
+      "narration_start_s": 37.19166666666666,
+      "narration_s": 5.78
+    },
+    {
+      "id": "s07",
+      "start_s": 44.291666666666664,
+      "duration_s": 5,
+      "frames": 120,
+      "planned_s": 5,
+      "narration_file": "outputs/narration/am/s07.wav",
+      "narration_start_s": 44.69166666666666,
+      "narration_s": 3.32
+    },
+    {
+      "id": "s08",
+      "start_s": 49.291666666666664,
+      "duration_s": 12.666666666666666,
+      "frames": 304,
+      "planned_s": 10,
+      "narration_file": "outputs/narration/am/s08.wav",
+      "narration_start_s": 49.69166666666666,
+      "narration_s": 11.53
+    },
+    {
+      "id": "s09",
+      "start_s": 61.958333333333336,
+      "duration_s": 9.333333333333334,
+      "frames": 224,
+      "planned_s": 7.5,
+      "narration_file": "outputs/narration/am/s09.wav",
+      "narration_start_s": 62.358333333333334,
+      "narration_s": 8.22
+    },
+    {
+      "id": "s10",
+      "start_s": 71.29166666666667,
+      "duration_s": 10,
+      "frames": 240,
+      "planned_s": 10,
+      "narration_file": "outputs/narration/am/s10.wav",
+      "narration_start_s": 71.69166666666668,
+      "narration_s": 7.72
+    }
+  ],
+  "end_card": {
+    "start_s": 81.29166666666667,
+    "duration_s": 3.5,
+    "frames": 84
+  },
+  "total_s": 84.79166666666667,
+  "total_frames": 2035
+}

@@ -20,7 +20,7 @@ export interface AspectConfig {
 
 export interface Config {
   models: {
-    tts: { provider: string; model: string; min_interval_ms: number };
+    tts: { provider: string; model: string; fallback_models?: string[]; min_interval_ms: number };
     text: { provider: string; model: string };
     image: { provider: string; model: string; steps: number };
     video: { provider: string; model: string; clip_seconds: number; draft_resolution: string };
