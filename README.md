@@ -1,0 +1,120 @@
+# The Teacher Who Listened: a heritage short, built as a pipeline
+
+A 60–90 second film about my aunt, who raised two daughters and taught social studies in Addis Ababa, and who loved to hear her students sing. It is narrated in Amharic (Afaan Oromo and English are selectable), has English subtitles and an end card that says it was made with AI.
+
+The film is not edited by hand. One file, [storyboard.json](storyboard.json), describes every shot, and a small pipeline turns it into keyframes, moving shots, narration, music and two finished exports. Change one shot in the storyboard, rerun, and only that shot is regenerated.
+
+## Run it
+
+You need [Node.js 24 or newer](https://nodejs.org) and nothing else. FFmpeg is installed by `npm install` as a bundled binary.
+
+```bash
+git clone <this repository>
+cd <this repository>
+npm install
+cp .env.example .env        # then fill in the three keys described below
+npm run film                # the whole pipeline, Amharic narration, both aspect ratios
+```
+
+With `make` installed, `make film` does the install and the run in one step.
+
+The finished files appear in `outputs/film/am/`:
+
+| File | What it is |
+|---|---|
+| `heritage_am_vertical.mp4` | 1080×1920 (9:16), for phone feeds |
+| `heritage_am_horizontal.mp4` | 1920×1080 (16:9) |
+| `heritage_am.en.srt` | The English subtitles as a separate file |
+
+The generated images, audio and exports are committed in `outputs/`, so a fresh clone reuses them: `npm run film` re-renders the video segments locally and calls no model. To regenerate everything from the storyboard with real model calls, run `npm run film -- --force`.
+
+### Setup: the keys
+
+All three are free and need no payment card. They go in `.env`, which is git-ignored.
+
+| Variable | Where to get it | Used for |
+|---|---|---|
+| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com) → Get API key | Narration (text to speech), translation |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard → Workers AI → Use REST API | Keyframes |
+| `CLOUDFLARE_API_TOKEN` | Same page, "Create a Workers AI API token" | Keyframes |
+
+Check that every provider answers before a long run:
+
+```bash
+npm run smoke
+```
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run film` | Validate → narration → keyframes → music → shots → assemble |
+| `npm run radio` | Narration over placeholder music on a black screen: the prototype for the first user test |
+| `npm run validate` | Check `storyboard.json` against the schema and the cross-field rules |
+| `npm run smoke` | Call each provider once and log its latency |
+| `npm run script` | Report narration length per language against the 60–90 second budget |
+| `npm run costs` | Summarise `runs.jsonl` into latency, GPU minutes and list-price cost per stage |
+| `npm test` | Unit tests for the contract, the cache key and the subtitles |
+
+Each stage can also be run alone: `npm run narration`, `keyframes`, `music`, `shots`, `assemble`.
+
+Options, passed after `--`:
+
+| Option | Meaning |
+|---|---|
+| `--lang am` | Narration language: `am` (default), `om` or `en`. Subtitles are always English |
+| `--aspect vertical` | `vertical`, `horizontal` or `both` (default) |
+| `--only s05` | Limit per-shot work to the named shots, comma-separated |
+| `--force` | Ignore the cache and regenerate |
+
+### Regenerating one shot
+
+Edit one shot's `image_prompt` or narration line in `storyboard.json`, then:
+
+```bash
+npm run film
+```
+
+Every other shot is reported as `cached`, and `runs.jsonl` gains one `model_call` line per changed output and a `cache_hit` line for everything else. The lines of one command share a `run_id`.
+
+## How it is built
+
+```
+storyboard.json ──► validate ──► narration ──► keyframes ──► music ──► shots ──► assemble ──► outputs/film/
+   (the contract)      │            │             │           │          │           │
+                       └────────────┴─────────────┴───────────┴──────────┴───────────┴──► runs.jsonl
+```
+
+| Stage | Script | Model | Runs on |
+|---|---|---|---|
+| Script | [pipeline/script.ts](pipeline/script.ts) | Gemini 3.8 Flash (translation drafts) | Gemini API |
+| Narration | [pipeline/narration.ts](pipeline/narration.ts) | Gemini 3.8 Flash TTS | Gemini API |
+| Keyframes | [pipeline/keyframes.ts](pipeline/keyframes.ts) | FLUX.2 klein 4B | Cloudflare Workers AI |
+| Moving shots | [pipeline/shots.ts](pipeline/shots.ts) | Wan 2.2 TI2V-5B, or a pan-and-zoom fallback | Kaggle notebook, or local FFmpeg |
+| Music | [pipeline/music.ts](pipeline/music.ts) | ACE-Step 1.5, or a synthesized placeholder | Kaggle notebook, or local FFmpeg |
+| Assembly | [pipeline/assemble.ts](pipeline/assemble.ts) | none | Local FFmpeg |
+
+[ARCHITECTURE.md](ARCHITECTURE.md) explains the contract, the caching and the failure handling.
+
+### The GPU stages
+
+Wan 2.2 and ACE-Step need a GPU, so they run in Kaggle notebooks under [kaggle/](kaggle/). The pipeline writes a job file for each (`outputs/kaggle/wan_jobs.json`, `outputs/kaggle/music_job.json`), the notebook reads it and writes clips or music candidates plus its own call log, and the next `npm run film` picks those up. Without them the film still builds: shots fall back to a slow pan-and-zoom over the keyframe and the music falls back to a placeholder pad, and each fallback is recorded in `runs.jsonl`.
+
+## What it costs
+
+Nothing was paid for. Measured latency, GPU minutes and the list-price equivalent of every stage are in [COSTS.md](COSTS.md), generated from [runs.jsonl](runs.jsonl).
+
+## The documents
+
+| File | Contents |
+|---|---|
+| [DESIGN.md](DESIGN.md) | Audience, intent, the reason for every shot, the two user tests and what changed |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Stages, contracts, caching, failure handling |
+| [EXPERIMENTS.md](EXPERIMENTS.md) | Hypothesis → change → result |
+| [FAILURES.md](FAILURES.md) | What broke, what was tried, what fixed it |
+| [COSTS.md](COSTS.md) | Measured latency and cost per stage |
+| [ETHICS.md](ETHICS.md) | Consent, licences, labelling |
+
+## Made with AI
+
+The images, the narrator's voice and the music in this film are AI-generated, and the film says so on its end card and in its file metadata. Most of the pipeline code was written by a coding agent under my direction. The story is true. Consent and licences are recorded in [ETHICS.md](ETHICS.md).
