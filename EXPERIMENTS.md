@@ -46,6 +46,16 @@ Each entry is hypothesis → change → result. One thing changes per experiment
 - **Decision:** cand_c, provisionally. It competes least with the narrator in the band where speech intelligibility lives, and its shape follows the cue sheet. The final choice is by ear, at low volume under the narration; if that overrides the measurement, it is recorded here.
 - **Note:** the setup on Kaggle (installing ACE-Step and downloading about 10 GB of weights) took far longer than the three generations together. The whole notebook run, including queueing and download, took 7.8 minutes (`remote_job` line in `runs.jsonl`).
 
+### E10. Does a real image-to-video clip beat pan-and-zoom?
+
+- **Hypothesis:** a Wan 2.2 clip of a slow, simple movement looks better than pan-and-zoom for shots with people, but a clip with a lot of movement will break.
+- **Change:** shots s03 (three people walking away), s08 (the teacher listening, children singing) and s09 (evening at the table), vertical only, Wan 2.2 TI2V-5B at 480×832, 49 frames, 20 steps, the shot's own seed. Everything else unchanged.
+- **Result:** partly confirmed. s08 is a slow push-in toward her face while the children sway, and s09 is a small movement at the table; both are used in the film. s03, the one with the most movement, broke: a blue machine-like object and a white smear appear partway through. It stays as pan-and-zoom.
+- **Cost:** about 400 GPU-seconds per 2-second clip on a T4, plus 333 seconds of loading, against about 20 seconds per pan-and-zoom shot on a laptop CPU.
+- **Edit:** a 2-second clip is slowed by up to 2× with frame blending, held on its last frame, and pushed in slowly across the whole shot so the hold does not look frozen.
+- **Not done:** the blind preference test with at least three viewers.
+- **Evidence:** `outputs/clips/vertical/`, `remote_ingest` lines in `runs.jsonl`, F13 in FAILURES.md.
+
 ## Planned
 
 Hypotheses are written down before the runs. Results are empty until the runs happen.
@@ -60,4 +70,3 @@ Hypotheses are written down before the runs. Results are empty until the runs ha
 | E07 | Keeping "no text" in the style block stops garbled writing on the chalkboard | Shot s05 with and without the last clause of the style block | Whether lettering appears on the board | |
 | E08 | The same prompt and seed at 9:16 and 16:9 give a composition that works in both, so one storyboard serves both exports | All shots in both aspects | Count of shots where the subject is cut off or off-centre | |
 | E09 | The brief's starting ducking settings leave the narration clear over the score | Threshold 0.02 against 0.05, same mix | A listener on a phone speaker; measured loudness in `runs.jsonl` | |
-| E10 | An image-to-video clip of a slow, simple movement beats pan-and-zoom for shots with people, but not for the establishing shot | Shots s01 and s06 as Wan 2.2 clips and as pan-and-zoom | Blind preference of at least three viewers; GPU minutes per clip | |

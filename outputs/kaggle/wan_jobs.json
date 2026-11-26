@@ -16,16 +16,6 @@
       "meta": "outputs/clips/vertical/s02.json"
     },
     {
-      "shot": "s03",
-      "aspect": "vertical",
-      "keyframe": "outputs/keyframes/vertical/s03.png",
-      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
-      "seed": 1003,
-      "input_hash": "d54b34e2d6411e27",
-      "output": "outputs/clips/vertical/s03.mp4",
-      "meta": "outputs/clips/vertical/s03.json"
-    },
-    {
       "shot": "s04",
       "aspect": "vertical",
       "keyframe": "outputs/keyframes/vertical/s04.png",
@@ -84,16 +74,6 @@
       "input_hash": "1ec94115c173f55f",
       "output": "outputs/clips/horizontal/s02.mp4",
       "meta": "outputs/clips/horizontal/s02.json"
-    },
-    {
-      "shot": "s03",
-      "aspect": "horizontal",
-      "keyframe": "outputs/keyframes/horizontal/s03.png",
-      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
-      "seed": 1003,
-      "input_hash": "01b3b399ccfc2efc",
-      "output": "outputs/clips/horizontal/s03.mp4",
-      "meta": "outputs/clips/horizontal/s03.json"
     },
     {
       "shot": "s04",

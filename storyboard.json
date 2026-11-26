@@ -172,7 +172,7 @@
       "image_prompt": "Wide shot from behind of the teacher walking hand in hand with her two daughters down a quiet Addis Ababa street in early morning light, jacaranda trees, low walls, long soft shadows, a blue and white minibus far in the distance",
       "seed": 1003,
       "motion": {
-        "mode": "i2v",
+        "mode": "kenburns",
         "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
         "kenburns": {
           "zoom_from": 1,

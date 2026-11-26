@@ -97,3 +97,11 @@ What broke, what was tried, and what fixed it. Newest last. Every entry is somet
 - **What happened:** the brief notes that Veo was retired from the Gemini API in favour of the Gemini Omni Flash video models. My key lists `gemini-omni-flash-preview`, `gemini-omni-1.1-flash` and `gemini-omni-1.2-flash`, so I tried one image-to-video call for shot s03 at the smallest setting (3 s, 360p) as a frontier comparison. It returned `429 Rate limit exceeded for model gemini-omni-1.2-flash (limit: 0 requests per day on Free Tier)`. The docs list the free tier as "Not available" and the price as about $0.023 per second at 360p and $0.07 per second at 720p. The preview model is listed as shut down.
 - **What I did:** recorded it, and kept Wan 2.2 on Kaggle as the only video model. A model appearing in the model list does not mean the free tier can call it.
 - **Evidence:** `runs.jsonl`, stage `experiment`, model `gemini-omni-1.2-flash`, status `error`.
+
+## F13. Wan 2.2 on a Kaggle T4: out of GPU memory, then killed, then working
+
+- **When:** 2026-11-26, three attempts at image-to-video for shots s03, s08 and s09.
+- **Attempt 1, GPU out of memory:** every clip failed with `CUDA out of memory ... 14.54 GiB memory in use`. The traceback shows it happened while moving the VAE onto the GPU to encode the keyframe. `enable_model_cpu_offload()` only moves out the module just before the next one in its chain, so the 11 GB text encoder was still on the GPU. After the first failure the memory was never freed, so the remaining clips failed in under a second.
+- **Attempt 2, killed:** I encoded the prompts first and moved the text encoder to the CPU by hand. The log ends with `Killed`. My reading is that the machine ran out of system memory with the text encoder and the video model both held at once, but the log does not say so.
+- **Attempt 3, worked:** two stages in one notebook. Stage A loads only the text encoder, encodes every prompt, then deletes it. Stage B loads the video model and VAE with no text encoder at all. Draft settings were 480×832, 49 frames, 20 steps, fp16 with VAE tiling. All three clips succeeded at about 400 seconds each on the T4, after 333 seconds of loading.
+- **Evidence:** `outputs/kaggle/pull/video/results.jsonl`, the `remote_ingest` lines in `runs.jsonl`, and the notebook source `kaggle/wan_i2v.py`.

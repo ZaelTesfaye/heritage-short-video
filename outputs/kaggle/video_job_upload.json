@@ -11,7 +11,7 @@
       "keyframe": "outputs/keyframes/vertical/s03.png",
       "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
       "seed": 1003,
-      "input_hash": "58abb2ec73277272",
+      "input_hash": "d54b34e2d6411e27",
       "output": "outputs/clips/vertical/s03.mp4",
       "meta": "outputs/clips/vertical/s03.json",
       "keyframe_file": "vertical_s03.png"
