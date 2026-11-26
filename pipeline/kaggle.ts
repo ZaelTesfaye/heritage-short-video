@@ -11,6 +11,7 @@ import { OUT, ROOT, isMain, loadEnv, parseStageArgs, readJson, rel, runMain, sle
 import type { StageOptions } from "./lib/env.ts";
 import { paths } from "./lib/paths.ts";
 import { logRun } from "./lib/runlog.ts";
+import { fileHash, hashInputs } from "./lib/cache.ts";
 import { ffmpeg } from "./lib/ffmpeg.ts";
 import { loadStoryboard } from "./lib/storyboard.ts";
 import { runMusic } from "./music.ts";
@@ -82,22 +83,29 @@ async function waitForKernel(ref: string, timeoutMin: number): Promise<string> {
   return "timeout";
 }
 
-/** Uploads keyframes for image-to-video as a private dataset, creating it the first time and versioning it after. */
-function uploadDataset(slug: string, title: string, files: { from: string; name: string }[], jobFile: string): string {
+/**
+ * Uploads keyframes for image-to-video as a private dataset named by the hash of its contents.
+ * The same keyframes reuse the same dataset; different keyframes get a new one. Versioning an existing
+ * dataset was refused (403) after an interrupted first upload, and a content-named dataset avoids that state.
+ */
+function uploadDataset(base: string, files: { from: string; name: string }[], jobFile: string): string {
   const user = username();
+  const hash = hashInputs(files.map((f) => ({ name: f.name, bytes: fileHash(f.from) }))).slice(0, 8);
+  const slug = `${base}-${hash}`;
+  const ref = `${user}/${slug}`;
+  if (/ready/i.test(kaggle(["datasets", "status", ref], { allowFail: true }))) {
+    console.log(`[kaggle] dataset ${ref} already holds these keyframes`);
+    return ref;
+  }
   // A fresh folder per upload: an interrupted upload can leave the previous one locked on Windows.
   const dir = join(OUT, "kaggle", "dataset", `${slug}-${Date.now()}`);
   mkdirSync(dir, { recursive: true });
   for (const file of files) copyFileSync(file.from, join(dir, file.name));
   copyFileSync(jobFile, join(dir, "job.json"));
-  writeJson(join(dir, "dataset-metadata.json"), { title, id: `${user}/${slug}`, licenses: [{ name: "CC0-1.0" }] });
-  const exists = !/not found|404/i.test(kaggle(["datasets", "status", `${user}/${slug}`], { allowFail: true }));
-  console.log(`[kaggle] ${exists ? "updating" : "creating"} dataset ${user}/${slug} (${files.length} keyframes)`);
-  const out = exists
-    ? kaggle(["datasets", "version", "-p", dir, "-m", `keyframes ${new Date().toISOString()}`, "-q"])
-    : kaggle(["datasets", "create", "-p", dir, "-q"]);
-  console.log(out.split("\n").slice(-2).join("\n"));
-  return `${user}/${slug}`;
+  writeJson(join(dir, "dataset-metadata.json"), { title: slug, id: ref, licenses: [{ name: "CC0-1.0" }] });
+  console.log(`[kaggle] creating dataset ${ref} (${files.length} keyframes)`);
+  console.log(kaggle(["datasets", "create", "-p", dir, "-q"]).split("\n").slice(-2).join("\n"));
+  return ref;
 }
 
 async function waitForDataset(ref: string): Promise<void> {
@@ -198,7 +206,7 @@ export async function runKaggleVideo(opts: StageOptions, timeoutMin = DEFAULT_TI
   const subJob = { ...all, jobs: todo.map((j: any) => ({ ...j, keyframe_file: `${j.aspect}_${j.shot}.png` })) };
   const jobFile = join(OUT, "kaggle", "video_job_upload.json");
   writeJson(jobFile, subJob);
-  const dataset = uploadDataset("heritage-short-keyframes", "heritage-short-keyframes", todo.map((j: any) => ({ from: join(ROOT, j.keyframe), name: `${j.aspect}_${j.shot}.png` })), jobFile);
+  const dataset = uploadDataset("heritage-kf", todo.map((j: any) => ({ from: join(ROOT, j.keyframe), name: `${j.aspect}_${j.shot}.png` })), jobFile);
   await waitForDataset(dataset);
 
   const script = readFileSync(join(ROOT, "kaggle", "wan_i2v.py"), "utf8").replace("__JOB_JSON__", JSON.stringify(subJob));

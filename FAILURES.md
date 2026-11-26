@@ -90,3 +90,10 @@ What broke, what was tried, and what fixed it. Newest last. Every entry is somet
 - **When:** 2026-11-26.
 - **What happened:** `ENOENT ... copyfile ... outputs/music/candidates/cand_a.wav`. The runner copied candidates into a folder it had never created.
 - **What fixed it:** create the folder first, and copy only finished `.wav` files.
+
+## F12. The frontier video model is not available on the free tier
+
+- **When:** 2026-11-26.
+- **What happened:** the brief notes that Veo was retired from the Gemini API in favour of the Gemini Omni Flash video models. My key lists `gemini-omni-flash-preview`, `gemini-omni-1.1-flash` and `gemini-omni-1.2-flash`, so I tried one image-to-video call for shot s03 at the smallest setting (3 s, 360p) as a frontier comparison. It returned `429 Rate limit exceeded for model gemini-omni-1.2-flash (limit: 0 requests per day on Free Tier)`. The docs list the free tier as "Not available" and the price as about $0.023 per second at 360p and $0.07 per second at 720p. The preview model is listed as shut down.
+- **What I did:** recorded it, and kept Wan 2.2 on Kaggle as the only video model. A model appearing in the model list does not mean the free tier can call it.
+- **Evidence:** `runs.jsonl`, stage `experiment`, model `gemini-omni-1.2-flash`, status `error`.

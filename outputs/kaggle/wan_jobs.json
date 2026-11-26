@@ -21,7 +21,7 @@
       "keyframe": "outputs/keyframes/vertical/s03.png",
       "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
       "seed": 1003,
-      "input_hash": "58abb2ec73277272",
+      "input_hash": "d54b34e2d6411e27",
       "output": "outputs/clips/vertical/s03.mp4",
       "meta": "outputs/clips/vertical/s03.json"
     },
@@ -31,7 +31,7 @@
       "keyframe": "outputs/keyframes/vertical/s04.png",
       "prompt": "The children wave, she raises a hand to greet them, the camera stays fixed.",
       "seed": 1004,
-      "input_hash": "4382ac9e4add0e07",
+      "input_hash": "6c8f904e7b732221",
       "output": "outputs/clips/vertical/s04.mp4",
       "meta": "outputs/clips/vertical/s04.json"
     },
@@ -41,7 +41,7 @@
       "keyframe": "outputs/keyframes/vertical/s05.png",
       "prompt": "She traces the outline with the pointer and turns her head toward the class, the camera pushes in slowly.",
       "seed": 1005,
-      "input_hash": "83bde2a69c3ab08d",
+      "input_hash": "c81d7337c1bcaee5",
       "output": "outputs/clips/vertical/s05.mp4",
       "meta": "outputs/clips/vertical/s05.json"
     },
@@ -51,7 +51,7 @@
       "keyframe": "outputs/keyframes/vertical/s06.png",
       "prompt": "She nods and smiles softly, the boy looks up, the camera stays fixed.",
       "seed": 1006,
-      "input_hash": "ecb9e577608bbe72",
+      "input_hash": "16f109d74f1ebae2",
       "output": "outputs/clips/vertical/s06.mp4",
       "meta": "outputs/clips/vertical/s06.json"
     },
@@ -61,7 +61,7 @@
       "keyframe": "outputs/keyframes/vertical/s08.png",
       "prompt": "The children sway gently as they sing, she tilts her head and smiles, the camera pushes in slowly toward her face.",
       "seed": 1008,
-      "input_hash": "17881089ea63a254",
+      "input_hash": "d276a71590a2246c",
       "output": "outputs/clips/vertical/s08.mp4",
       "meta": "outputs/clips/vertical/s08.json"
     },
@@ -91,7 +91,7 @@
       "keyframe": "outputs/keyframes/horizontal/s03.png",
       "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
       "seed": 1003,
-      "input_hash": "9b8698f308e790af",
+      "input_hash": "01b3b399ccfc2efc",
       "output": "outputs/clips/horizontal/s03.mp4",
       "meta": "outputs/clips/horizontal/s03.json"
     },
@@ -101,7 +101,7 @@
       "keyframe": "outputs/keyframes/horizontal/s04.png",
       "prompt": "The children wave, she raises a hand to greet them, the camera stays fixed.",
       "seed": 1004,
-      "input_hash": "e41b767252c10d67",
+      "input_hash": "3417e5b0530e8798",
       "output": "outputs/clips/horizontal/s04.mp4",
       "meta": "outputs/clips/horizontal/s04.json"
     },
@@ -111,7 +111,7 @@
       "keyframe": "outputs/keyframes/horizontal/s05.png",
       "prompt": "She traces the outline with the pointer and turns her head toward the class, the camera pushes in slowly.",
       "seed": 1005,
-      "input_hash": "b94d1bfcc38b9652",
+      "input_hash": "d079045745cbb8b7",
       "output": "outputs/clips/horizontal/s05.mp4",
       "meta": "outputs/clips/horizontal/s05.json"
     },
@@ -121,7 +121,7 @@
       "keyframe": "outputs/keyframes/horizontal/s06.png",
       "prompt": "She nods and smiles softly, the boy looks up, the camera stays fixed.",
       "seed": 1006,
-      "input_hash": "e62a049a51282de0",
+      "input_hash": "240c7769b01315fa",
       "output": "outputs/clips/horizontal/s06.mp4",
       "meta": "outputs/clips/horizontal/s06.json"
     },
@@ -131,7 +131,7 @@
       "keyframe": "outputs/keyframes/horizontal/s08.png",
       "prompt": "The children sway gently as they sing, she tilts her head and smiles, the camera pushes in slowly toward her face.",
       "seed": 1008,
-      "input_hash": "0a04295d59da520f",
+      "input_hash": "a8e79408806cd2dc",
       "output": "outputs/clips/horizontal/s08.mp4",
       "meta": "outputs/clips/horizontal/s08.json"
     },

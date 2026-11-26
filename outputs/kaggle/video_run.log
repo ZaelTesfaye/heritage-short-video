@@ -1,0 +1,12 @@
+
+> heritage-short@1.0.0 kaggle
+> node pipeline/kaggle.ts video --only s03,s08,s09 --aspect vertical
+
+[kaggle] creating dataset zaelkassa7/heritage-kf-4138ba13 (3 keyframes)
+Your private Dataset is being created. Please check progress at https://www.kaggle.com/datasets/zaelkassa7/heritage-kf-4138ba13
+[kaggle] pushing zaelkassa7/heritage-short-video
+Kernel version 2 successfully pushed.  Please check progress at https://www.kaggle.com/code/zaelkassa7/heritage-short-video
+[kaggle] zaelkassa7/heritage-short-video: KernelWorkerStatus.RUNNING
+[kaggle] zaelkassa7/heritage-short-video: KernelWorkerStatus.ERROR
+[kaggle] zaelkassa7/heritage-short-video ended: KernelWorkerStatus.ERROR; outputs in outputs/kaggle/pull/video
+[kaggle] video: 0 result line(s) collected; run `npm run film` to cut them in

@@ -2,6 +2,7 @@
 # Keyframes arrive as a private Kaggle dataset; the job (prompts, seeds, input hashes) is written into JOB below.
 # Each clip is saved as soon as it finishes, with a .json beside it carrying the input hash, so the local
 # pipeline uses a clip only while its keyframe, prompt and seed are unchanged. One results.jsonl line per call.
+import gc
 import glob
 import json
 import os
@@ -11,6 +12,7 @@ import time
 import traceback
 
 JOB = json.loads(r"""__JOB_JSON__""")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 OUT = "/kaggle/working"
 RESULTS = os.path.join(OUT, "results.jsonl")
 MODEL_ID = "Wan-AI/Wan2.2-TI2V-5B-Diffusers"
@@ -61,6 +63,8 @@ def main():
         vae = AutoencoderKLWan.from_pretrained(MODEL_ID, subfolder="vae", torch_dtype=torch.float32)
         pipe = WanImageToVideoPipeline.from_pretrained(MODEL_ID, vae=vae, torch_dtype=dtype)
         pipe.enable_model_cpu_offload()
+        if hasattr(pipe.vae, "enable_tiling"):
+            pipe.vae.enable_tiling()
     except Exception as e:
         traceback.print_exc()
         log({"provider": "kaggle", "model": MODEL_ID, "shot": "load", "status": "error", "error": str(e)[:800], "latency_s": round(time.time() - t0, 2), "gpu": gpu})
@@ -77,7 +81,16 @@ def main():
         try:
             image = load_image(find_keyframe(job["keyframe_file"])).resize((width, height))
             generator = torch.Generator(device="cpu").manual_seed(int(job["seed"]))
-            frames = pipe(image=image, prompt=job["prompt"], negative_prompt=NEGATIVE, height=height, width=width,
+            # Model offloading only moves out the module just before the next one in its chain, so the 11 GB
+            # text encoder stayed on the GPU when the VAE was loaded to encode the image: out of memory on a T4.
+            # Encode the prompts first, then move the text encoder off the GPU by hand.
+            with torch.no_grad():
+                prompt_embeds, negative_embeds = pipe.encode_prompt(prompt=job["prompt"], negative_prompt=NEGATIVE,
+                                                                    do_classifier_free_guidance=True, device="cuda")
+            pipe.text_encoder.to("cpu")
+            gc.collect()
+            torch.cuda.empty_cache()
+            frames = pipe(image=image, prompt_embeds=prompt_embeds, negative_prompt_embeds=negative_embeds, height=height, width=width,
                           num_frames=NUM_FRAMES, num_inference_steps=STEPS, guidance_scale=GUIDANCE, generator=generator).frames[0]
             arr = np.asarray(frames, dtype=np.float32)
             if not np.isfinite(arr).all() or arr.mean() < 0.01:
@@ -94,6 +107,7 @@ def main():
         entry["latency_s"] = round(time.time() - started, 2)
         entry["gpu_seconds"] = entry["latency_s"]
         log(entry)
+        gc.collect()
         torch.cuda.empty_cache()
 
 

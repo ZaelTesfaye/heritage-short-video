@@ -26,6 +26,7 @@ export interface Shot {
   narration: Record<string, string>;
   subtitle: string;
   music_cue?: string;
+  use_reference_sheets?: boolean;
 }
 
 export interface Character {

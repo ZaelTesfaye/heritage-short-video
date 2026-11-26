@@ -71,8 +71,8 @@
         "seed": 47
       }
     ],
-    "chosen": "cand_a",
-    "chosen_reason": "Provisional: the only candidate of the first ACE-Step run that downloaded completely over a slow connection. Measured 85.0 s, -14.9 LUFS, 7.2 LU loudness range, plucked melody over sustained harmony with no vocals. To be confirmed by ear against cand_b and cand_c, listened to quietly under the narration.",
+    "chosen": "cand_c",
+    "chosen_reason": "Chosen by measurement, to be confirmed by ear: of the three seeds it puts the least energy in the 1-4 kHz band where the narrator speaks (-28.7 dB mean, against -27.8 for A and -26.6 for B), is the quietest overall (-16.3 LUFS), and has a sparse opening that builds toward the end, which matches the cue sheet (enter softly at s01, fullest at s08).",
     "cues": [
       {
         "shot": "s01",
@@ -188,7 +188,8 @@
         "om": "Ganama ganama sadanuu waliin ba'u turan; ijoolleen ishee barachuuf, isheen immoo barsiisuuf.",
         "en": "Every morning the three of them left together: her girls to learn, and she to teach."
       },
-      "subtitle": "Every morning the three of them left together: her girls to learn, and she to teach."
+      "subtitle": "Every morning the three of them left together: her girls to learn, and she to teach.",
+      "use_reference_sheets": false
     },
     {
       "id": "s04",
@@ -198,7 +199,7 @@
       "characters": [
         "aunt"
       ],
-      "image_prompt": "Wide shot of a simple school gate in Addis Ababa in morning sun, the teacher walking in through the gate and smiling, a group of happy Ethiopian schoolchildren with warm brown skin, dark brown eyes and short black hair or braids, in navy-blue school sweaters standing together inside the schoolyard and waving hello to her, a plain low school building with bare walls and no signs, warm dust glowing in the light",
+      "image_prompt": "Wide shot of a simple school gate in Addis Ababa in morning sun, the teacher walking in through the gate and smiling, a group of happy Ethiopian schoolchildren with warm brown skin, dark brown eyes and short black hair or braids, in navy-blue school sweaters standing together inside the schoolyard and waving hello to her, a plain low school building with bare walls and no signs, warm dust glowing in the light. Only one adult woman appears in the picture: the teacher, shown once",
       "seed": 1004,
       "motion": {
         "mode": "i2v",
@@ -247,7 +248,8 @@
         "om": "Barsiistuu Saayinsii Hawaasaa turte; waa'ee biyya keenyaa, ummattoota ishee fi seenaa ishee barsiifti turte.",
         "en": "She taught social studies: our country, its peoples and its history."
       },
-      "subtitle": "She taught social studies: our country, its peoples and its history."
+      "subtitle": "She taught social studies: our country, its peoples and its history.",
+      "use_reference_sheets": false
     },
     {
       "id": "s06",

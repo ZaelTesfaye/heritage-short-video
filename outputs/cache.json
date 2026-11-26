@@ -80,29 +80,29 @@
     "created_at": "2026-11-26T17:24:43.180Z"
   },
   "outputs/keyframes/vertical/s03.png": {
-    "hash": "0e2b263a9252454b",
+    "hash": "b574997b15a97f14",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:25:35.915Z"
+    "created_at": "2026-11-26T18:24:17.319Z"
   },
   "outputs/keyframes/vertical/s04.png": {
-    "hash": "fced5c13a0e88452",
+    "hash": "40643777145dd344",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:51:21.906Z"
+    "created_at": "2026-11-26T18:07:18.414Z"
   },
   "outputs/keyframes/vertical/s06.png": {
-    "hash": "b6a8f4c00b172e22",
+    "hash": "a93e83ca1d65beed",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:28:11.632Z"
+    "created_at": "2026-11-26T17:56:41.251Z"
   },
   "outputs/keyframes/vertical/s07.png": {
-    "hash": "5297a190a624e413",
+    "hash": "affc8fde9ccc97f9",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:28:30.787Z"
+    "created_at": "2026-11-26T17:57:10.054Z"
   },
   "outputs/keyframes/vertical/s08.png": {
-    "hash": "c9d19562d809111b",
+    "hash": "85ffd3c38d197086",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:29:07.176Z"
+    "created_at": "2026-11-26T17:57:51.646Z"
   },
   "outputs/keyframes/vertical/s09.png": {
     "hash": "5fa0938d80e52f35",
@@ -110,9 +110,9 @@
     "created_at": "2026-11-26T17:30:11.752Z"
   },
   "outputs/keyframes/vertical/s10.png": {
-    "hash": "3cf833b550315c9d",
+    "hash": "a4e946cf8bc71cb9",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:30:30.069Z"
+    "created_at": "2026-11-26T17:58:16.783Z"
   },
   "outputs/keyframes/horizontal/s01.png": {
     "hash": "141ce7962a65dff0",
@@ -125,34 +125,34 @@
     "created_at": "2026-11-26T17:31:47.488Z"
   },
   "outputs/keyframes/horizontal/s03.png": {
-    "hash": "8c041642ef98999e",
+    "hash": "b92d0cf46754bb99",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:32:48.521Z"
+    "created_at": "2026-11-26T18:25:16.198Z"
   },
   "outputs/keyframes/horizontal/s04.png": {
-    "hash": "e370c73c612ce359",
+    "hash": "7326bf2c6a23b48f",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:33:32.335Z"
+    "created_at": "2026-11-26T18:09:44.906Z"
   },
   "outputs/keyframes/horizontal/s05.png": {
-    "hash": "9628b7e9c5418ac8",
+    "hash": "1abdc762544c0bac",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:34:14.707Z"
+    "created_at": "2026-11-26T18:25:54.141Z"
   },
   "outputs/keyframes/horizontal/s06.png": {
-    "hash": "85cf58b61d6b024f",
+    "hash": "4f1a97e059bdadd4",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:34:58.491Z"
+    "created_at": "2026-11-26T18:02:26.788Z"
   },
   "outputs/keyframes/horizontal/s07.png": {
-    "hash": "15c55e28a89fbdc8",
+    "hash": "d432867a32131bdb",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:35:39.744Z"
+    "created_at": "2026-11-26T18:03:12.939Z"
   },
   "outputs/keyframes/horizontal/s08.png": {
-    "hash": "bab569182d31d274",
+    "hash": "e828045f11d467da",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:36:22.602Z"
+    "created_at": "2026-11-26T18:05:38.008Z"
   },
   "outputs/keyframes/horizontal/s09.png": {
     "hash": "ddb3018277073715",
@@ -160,13 +160,173 @@
     "created_at": "2026-11-26T17:37:23.028Z"
   },
   "outputs/keyframes/vertical/s05.png": {
-    "hash": "19ac677e8099d4c4",
+    "hash": "2ba759d563277812",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:49:51.906Z"
+    "created_at": "2026-11-26T18:24:47.798Z"
   },
   "outputs/keyframes/horizontal/s10.png": {
-    "hash": "9b94383fc6caa81a",
+    "hash": "00be8bc6665e32d4",
     "stage": "keyframes",
-    "created_at": "2026-11-26T17:50:13.715Z"
+    "created_at": "2026-11-26T18:05:57.559Z"
+  },
+  "remote:outputs/music/candidates/results.jsonl#0": {
+    "hash": "3b746c01133b95d9",
+    "stage": "music",
+    "created_at": "2026-11-26T17:58:45.039Z"
+  },
+  "remote:outputs/music/candidates/results.jsonl#1": {
+    "hash": "4b451882e0eb4bd9",
+    "stage": "music",
+    "created_at": "2026-11-26T17:58:45.040Z"
+  },
+  "remote:outputs/music/candidates/results.jsonl#2": {
+    "hash": "3cf7addf0e4ae6ac",
+    "stage": "music",
+    "created_at": "2026-11-26T17:58:45.042Z"
+  },
+  "remote:outputs/clips/results.jsonl#0": {
+    "hash": "23ace2bb857cb70d",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:13:59.490Z"
+  },
+  "remote:outputs/clips/results.jsonl#1": {
+    "hash": "dfa3be5ceaeede2b",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:13:59.491Z"
+  },
+  "remote:outputs/clips/results.jsonl#2": {
+    "hash": "bb91bf2a09b262d8",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:13:59.492Z"
+  },
+  "remote:outputs/clips/results.jsonl#3": {
+    "hash": "f972eb4bee952466",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:13:59.494Z"
+  },
+  "outputs/segments/am/vertical/s01.mp4": {
+    "hash": "56632b196b1e3f19",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:14:07.987Z"
+  },
+  "outputs/segments/am/vertical/s02.mp4": {
+    "hash": "25056f12aabe06c9",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:14:17.165Z"
+  },
+  "outputs/segments/am/vertical/s03.mp4": {
+    "hash": "77b6e0ad4d42c778",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:26:48.735Z"
+  },
+  "outputs/segments/am/vertical/s04.mp4": {
+    "hash": "e8f5c29b0497465e",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:14:38.320Z"
+  },
+  "outputs/segments/am/vertical/s05.mp4": {
+    "hash": "349ef62224004222",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:26:59.986Z"
+  },
+  "outputs/segments/am/vertical/s06.mp4": {
+    "hash": "041460d6aa061a47",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:01.119Z"
+  },
+  "outputs/segments/am/vertical/s07.mp4": {
+    "hash": "9470cfb7072b30ad",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:07.666Z"
+  },
+  "outputs/segments/am/vertical/s08.mp4": {
+    "hash": "4771e10a4c7da2c9",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:23.484Z"
+  },
+  "outputs/segments/am/vertical/s09.mp4": {
+    "hash": "f2dcf8844d13e1a1",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:36.136Z"
+  },
+  "outputs/segments/am/vertical/s10.mp4": {
+    "hash": "250657912cbe84a4",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:48.838Z"
+  },
+  "outputs/segments/am/vertical/end_card.mp4": {
+    "hash": "e96ace66b9b7d5d6",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:15:52.230Z"
+  },
+  "outputs/segments/am/horizontal/s01.mp4": {
+    "hash": "799a33d640ae5025",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:16:01.746Z"
+  },
+  "outputs/segments/am/horizontal/s02.mp4": {
+    "hash": "fb10f7f80448c36c",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:16:12.045Z"
+  },
+  "outputs/segments/am/horizontal/s03.mp4": {
+    "hash": "4f3da4f55008bbb5",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:27:12.008Z"
+  },
+  "outputs/segments/am/horizontal/s04.mp4": {
+    "hash": "06a5dd10592fbf43",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:16:32.231Z"
+  },
+  "outputs/segments/am/horizontal/s05.mp4": {
+    "hash": "08fbf8df45ca05e6",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:27:24.660Z"
+  },
+  "outputs/segments/am/horizontal/s06.mp4": {
+    "hash": "a3b7c5b07785b80c",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:16:54.528Z"
+  },
+  "outputs/segments/am/horizontal/s07.mp4": {
+    "hash": "42f46f7ff5176a6f",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:17:03.417Z"
+  },
+  "outputs/segments/am/horizontal/s08.mp4": {
+    "hash": "d0dc37f52d254910",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:17:18.938Z"
+  },
+  "outputs/segments/am/horizontal/s09.mp4": {
+    "hash": "217f2681534a3bf5",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:17:31.700Z"
+  },
+  "outputs/segments/am/horizontal/s10.mp4": {
+    "hash": "b1cecd6091d1914a",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:17:44.929Z"
+  },
+  "outputs/segments/am/horizontal/end_card.mp4": {
+    "hash": "3ea8910f8620ccc4",
+    "stage": "shots",
+    "created_at": "2026-11-26T18:17:48.253Z"
+  },
+  "outputs/film/am/mix.wav": {
+    "hash": "427170c1d451a449",
+    "stage": "assemble",
+    "created_at": "2026-11-26T18:18:05.936Z"
+  },
+  "outputs/film/am/heritage_am_vertical.mp4": {
+    "hash": "a7ad7617238e833b",
+    "stage": "assemble",
+    "created_at": "2026-11-26T18:29:14.165Z"
+  },
+  "outputs/film/am/heritage_am_horizontal.mp4": {
+    "hash": "66b57e23aa7019ab",
+    "stage": "assemble",
+    "created_at": "2026-11-26T18:31:03.870Z"
   }
 }

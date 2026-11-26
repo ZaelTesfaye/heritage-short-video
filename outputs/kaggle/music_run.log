@@ -6,3 +6,8 @@
 [kaggle] pushing zaelkassa7/heritage-short-music
 Kernel version 2 successfully pushed.  Please check progress at https://www.kaggle.com/code/zaelkassa7/heritage-short-music
 [kaggle] zaelkassa7/heritage-short-music: KernelWorkerStatus.RUNNING
+[kaggle] zaelkassa7/heritage-short-music: KernelWorkerStatus.COMPLETE
+[kaggle] zaelkassa7/heritage-short-music ended: complete; outputs in outputs/kaggle/pull/music
+[music] copied 3 ACE-Step call(s) from the Kaggle log into runs.jsonl
+[music] score: cand_a (outputs/music/candidates/cand_a.wav)
+[kaggle] music: 3 result line(s) collected

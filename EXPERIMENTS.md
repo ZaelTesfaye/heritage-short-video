@@ -31,6 +31,21 @@ Each entry is hypothesis → change → result. One thing changes per experiment
 - **Result of the second run:** see the regenerated keyframes; outcome recorded below once checked.
 - **Evidence:** first versions in `outputs/experiments/e13_extras_v1/`.
 
+### E11. Which of three score candidates leaves room for the voice?
+
+- **Hypothesis:** of three ACE-Step candidates from the same caption, tempo and key, at least one sits under the voice without a competing melody, and it can be picked partly by measurement.
+- **Change:** only the seed (11, 23, 47). Caption, 70 BPM, C major, 85 s, instrumental, 8 steps and shift 3.0 fixed. Run on a Kaggle T4.
+- **Result:** three clearly different pieces, each about 16 to 22 GPU-seconds on a T4 (`runs.jsonl`, `remote_ingest` lines). Measured:
+
+| Candidate | Integrated loudness | Loudness range | Mean level in the 1–4 kHz voice band | Shape in the spectrogram |
+|---|---|---|---|---|
+| cand_a (seed 11) | −15.2 LUFS | 7.2 LU | −27.8 dB | Dense from start to end |
+| cand_b (seed 23) | −14.4 LUFS | 9.0 LU | −26.6 dB | Sparse opening, then busy |
+| cand_c (seed 47) | −16.3 LUFS | 8.7 LU | −28.7 dB | Sparse opening, builds toward the end |
+
+- **Decision:** cand_c, provisionally. It competes least with the narrator in the band where speech intelligibility lives, and its shape follows the cue sheet. The final choice is by ear, at low volume under the narration; if that overrides the measurement, it is recorded here.
+- **Note:** the setup on Kaggle (installing ACE-Step and downloading about 10 GB of weights) took far longer than the three generations together. The whole notebook run, including queueing and download, took 7.8 minutes (`remote_job` line in `runs.jsonl`).
+
 ## Planned
 
 Hypotheses are written down before the runs. Results are empty until the runs happen.
@@ -46,4 +61,3 @@ Hypotheses are written down before the runs. Results are empty until the runs ha
 | E08 | The same prompt and seed at 9:16 and 16:9 give a composition that works in both, so one storyboard serves both exports | All shots in both aspects | Count of shots where the subject is cut off or off-centre | |
 | E09 | The brief's starting ducking settings leave the narration clear over the score | Threshold 0.02 against 0.05, same mix | A listener on a phone speaker; measured loudness in `runs.jsonl` | |
 | E10 | An image-to-video clip of a slow, simple movement beats pan-and-zoom for shots with people, but not for the establishing shot | Shots s01 and s06 as Wan 2.2 clips and as pan-and-zoom | Blind preference of at least three viewers; GPU minutes per clip | |
-| E11 | Of three ACE-Step candidates from the same caption, at least one sits under the voice without a competing melody | Three seeds, same caption, tempo and key | Listened at low volume under the narration; the reason for the choice goes in `music.chosen_reason` | |

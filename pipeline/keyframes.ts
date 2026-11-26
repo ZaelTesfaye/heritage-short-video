@@ -120,7 +120,7 @@ export async function runKeyframes(opts: StageOptions): Promise<void> {
   for (const aspect of opts.aspects) {
     const size = config.aspects[aspect].keyframe;
     for (const shot of selectShots(sb, opts.only)) {
-      const references = useReferences
+      const references = useReferences && shot.use_reference_sheets !== false
         ? charactersIn(sb, shot).map((c) => ({ name: c.id, file: paths.reference(c.id) }))
         : [];
       const missing = references.find((r) => !existsSync(r.file));

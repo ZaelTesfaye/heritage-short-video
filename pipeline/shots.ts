@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import { isMain, loadConfig, parseStageArgs, readJson, rel, runMain, writeJson } from "./lib/env.ts";
 import type { Aspect, StageOptions } from "./lib/env.ts";
 import { cached, fileHash, hashInputs } from "./lib/cache.ts";
-import { ffmpeg, localRender } from "./lib/ffmpeg.ts";
+import { ffmpeg, localRender, mediaDuration } from "./lib/ffmpeg.ts";
 import { paths } from "./lib/paths.ts";
 import { ingestRemoteRuns } from "./lib/remote.ts";
 import { logRun } from "./lib/runlog.ts";
@@ -111,10 +111,25 @@ export async function runShots(opts: StageOptions): Promise<void> {
         if (shot.motion.mode === "i2v" && !clip) {
           logRun({ stage: "shots", event: "fallback", provider: "local", model: "ffmpeg", status: "ok", latency_ms: 0, shot: shot.id, lang, aspect, input_hash: inputHash, note: `no current ${config.models.video.model} clip for this keyframe and prompt; using Ken Burns pan-and-zoom` });
         }
-        await localRender({ stage: "shots", shot: shot.id, lang, aspect, params: { mode, frames: timing.frames, width, height }, input_hash: inputHash, output: rel(output) }, () => {
+        await localRender({ stage: "shots", shot: shot.id, lang, aspect, params: { mode, frames: timing.frames, width, height }, input_hash: inputHash, output: rel(output) }, async () => {
           if (clip) {
-            // Fit the clip to the frame, hold its last frame if the narration runs longer, and trim to length.
-            const filter = `scale=${width}:${height}:force_original_aspect_ratio=increase:flags=lanczos,crop=${width}:${height},fps=${fps},tpad=stop_mode=clone:stop_duration=${Math.ceil(timing.duration_s)},setsar=1,format=yuv420p`;
+            // Draft clips are about 3 s and shots run 6-13 s. Slow the clip by up to 2x with frame blending
+            // (gentle motion suits slow motion), hold its last frame for the rest, and push in slowly across
+            // the whole shot so the hold never looks frozen. Then fit to the frame and trim to the exact length.
+            const clipSeconds = await mediaDuration(clip);
+            const slow = Math.min(2, Math.max(1, timing.duration_s / clipSeconds));
+            const T = timing.duration_s.toFixed(3);
+            const filter = [
+              `setpts=${slow.toFixed(3)}*PTS`,
+              `minterpolate=fps=${fps}:mi_mode=blend`,
+              `tpad=stop_mode=clone:stop_duration=${Math.ceil(timing.duration_s)}`,
+              `scale=${width}:${height}:force_original_aspect_ratio=increase:flags=lanczos`,
+              `crop=${width}:${height}`,
+              `crop=w='iw/(1+0.10*min(t/${T},1))':h='ih/(1+0.10*min(t/${T},1))':x='(iw-ow)/2':y='(ih-oh)/2'`,
+              `scale=${width}:${height}:flags=lanczos`,
+              "setsar=1",
+              "format=yuv420p",
+            ].join(",");
             return ffmpeg(["-i", clip, "-vf", filter, "-frames:v", String(timing.frames), ...encodeArgs(fps), output]);
           }
           return ffmpeg(["-i", keyframe, "-vf", kenBurnsFilter(shot.motion.kenburns, timing.frames, width, height, fps), "-frames:v", String(timing.frames), ...encodeArgs(fps), output]);
