@@ -93,6 +93,8 @@ export interface StageOptions {
   only: string[] | null;
   /** Ignore the cache and regenerate. */
   force: boolean;
+  /** Also run the GPU stages on Kaggle (music, image-to-video) before assembling. */
+  remote: boolean;
   positionals: string[];
 }
 
@@ -105,6 +107,7 @@ export function parseStageArgs(argv: string[] = process.argv.slice(2)): StageOpt
       aspect: { type: "string", default: "both" },
       only: { type: "string" },
       force: { type: "boolean", default: false },
+      remote: { type: "boolean", default: false },
     },
   });
   const aspect = values.aspect as string;
@@ -116,6 +119,7 @@ export function parseStageArgs(argv: string[] = process.argv.slice(2)): StageOpt
     aspects: aspect === "both" ? ALL_ASPECTS : [aspect as Aspect],
     only: values.only ? values.only.split(",").map((s) => s.trim()) : null,
     force: values.force as boolean,
+    remote: values.remote as boolean,
     positionals,
   };
 }

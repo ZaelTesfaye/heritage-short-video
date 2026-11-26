@@ -7,12 +7,27 @@
     "intent": "DRAFT, to be confirmed by the author: they should feel proud of her and recognise the quiet kindness she gave both her daughters and her students.",
     "default_language": "am",
     "languages": [
-      { "code": "am", "name": "Amharic", "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by a native speaker." },
-      { "code": "om", "name": "Afaan Oromo", "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by a native speaker. The word for aunt (adaadaa, father's sister) must be confirmed." },
-      { "code": "en", "name": "English", "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by the author." }
+      {
+        "code": "am",
+        "name": "Amharic",
+        "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by a native speaker."
+      },
+      {
+        "code": "om",
+        "name": "Afaan Oromo",
+        "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by a native speaker. The word for aunt (adaadaa, father's sister) must be confirmed."
+      },
+      {
+        "code": "en",
+        "name": "English",
+        "review": "Drafted with a coding agent on 2026-11-26. Not yet checked by the author."
+      }
     ],
     "fps": 24,
-    "target_duration_s": { "min": 60, "max": 90 }
+    "target_duration_s": {
+      "min": 60,
+      "max": 90
+    }
   },
   "style": {
     "style_block": "Hand-painted gouache storybook illustration, visible brush texture, warm earthy palette of ochre, terracotta and soft teal, gentle golden light, soft edges, calm and tender mood, subject centred in the frame, no text, no letters, no writing"
@@ -20,14 +35,14 @@
   "characters": [
     {
       "id": "aunt",
-      "description": "the teacher, an Ethiopian woman in her late thirties with a kind round face and a gentle smile, black hair in a low bun, a thin white cotton shawl over her shoulders, a mustard-yellow cardigan and a long teal dress",
-      "sheet_prompt": "Character reference sheet of one woman shown three times on a plain cream background: front view, three-quarter view and side view, full figure. She is an Ethiopian teacher in her late thirties with a kind round face and a gentle smile, black hair in a low bun, a thin white cotton shawl over her shoulders, a mustard-yellow cardigan and a long teal dress, holding a piece of white chalk",
+      "description": "the teacher, an Ethiopian Habesha woman in her late thirties with warm medium-brown skin, dark brown eyes, a kind round face and a gentle smile, black hair in a low bun, a thin white cotton netela shawl over her shoulders, a mustard-yellow cardigan and a long teal dress",
+      "sheet_prompt": "Character reference sheet of one woman shown three times on a plain cream background: front view, three-quarter view and side view, full figure. She is an Ethiopian Habesha teacher in her late thirties with warm medium-brown skin, dark brown eyes, a kind round face and a gentle smile, black hair in a low bun, a thin white cotton netela shawl over her shoulders, a mustard-yellow cardigan and a long teal dress, holding a piece of white chalk",
       "seed": 4101
     },
     {
       "id": "daughters",
-      "description": "her two daughters, Ethiopian girls aged about seven and ten with neatly braided hair, both in navy-blue school sweaters and grey skirts",
-      "sheet_prompt": "Character reference sheet of two sisters standing side by side on a plain cream background, full figure, front view. Ethiopian girls aged about seven and ten with neatly braided hair, both in navy-blue school sweaters and grey skirts, each carrying a small cloth school bag",
+      "description": "her two daughters, Ethiopian sisters with warm brown skin and dark brown eyes, clearly different ages: the older about ten and a head taller, the younger about seven with a rounder face, both with neatly braided black hair, navy-blue school sweaters and grey skirts",
+      "sheet_prompt": "Character reference sheet of two Ethiopian sisters standing side by side on a plain cream background, full figure, front view. Both have warm brown skin, dark brown eyes and neatly braided black hair. They are clearly different ages: the older girl is about ten and a head taller, the younger girl is about seven with a rounder face. Both wear navy-blue school sweaters and grey skirts and carry small cloth school bags",
       "seed": 4102
     }
   ],
@@ -43,17 +58,38 @@
     "key": "C major",
     "duration_s": 85,
     "candidates": [
-      { "id": "cand_a", "seed": 11 },
-      { "id": "cand_b", "seed": 23 },
-      { "id": "cand_c", "seed": 47 }
+      {
+        "id": "cand_a",
+        "seed": 11
+      },
+      {
+        "id": "cand_b",
+        "seed": 23
+      },
+      {
+        "id": "cand_c",
+        "seed": 47
+      }
     ],
-    "chosen": null,
-    "chosen_reason": "",
+    "chosen": "cand_a",
+    "chosen_reason": "Provisional: the only candidate of the first ACE-Step run that downloaded completely over a slow connection. Measured 85.0 s, -14.9 LUFS, 7.2 LU loudness range, plucked melody over sustained harmony with no vocals. To be confirmed by ear against cand_b and cand_c, listened to quietly under the narration.",
     "cues": [
-      { "shot": "s01", "note": "Enter softly with the lyre alone." },
-      { "shot": "s04", "note": "Piano joins as the children appear; a little more warmth." },
-      { "shot": "s08", "note": "The theme returns at its fullest while the children sing." },
-      { "shot": "s10", "note": "Resolve and fade under the last line, out by the end card." }
+      {
+        "shot": "s01",
+        "note": "Enter softly with the lyre alone."
+      },
+      {
+        "shot": "s04",
+        "note": "Piano joins as the children appear; a little more warmth."
+      },
+      {
+        "shot": "s08",
+        "note": "The theme returns at its fullest while the children sing."
+      },
+      {
+        "shot": "s10",
+        "note": "Resolve and fade under the last line, out by the end card."
+      }
     ]
   },
   "end_card": {
@@ -77,7 +113,14 @@
       "motion": {
         "mode": "kenburns",
         "prompt": "Slow push in toward the lit window, thin smoke drifting, fixed horizon.",
-        "kenburns": { "zoom_from": 1.0, "zoom_to": 1.14, "x_from": 0.5, "x_to": 0.5, "y_from": 0.5, "y_to": 0.55 }
+        "kenburns": {
+          "zoom_from": 1,
+          "zoom_to": 1.14,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.5,
+          "y_to": 0.55
+        }
       },
       "narration": {
         "am": "አዲስ አበባ ገና ሳትነቃ፣ የአክስቴ ቀን ቀድሞ ይጀምር ነበር።",
@@ -92,13 +135,23 @@
       "reason": "Introduces her first as a mother, so the classroom scenes later are understood as her second job of care, not her only one.",
       "shot_size": "medium",
       "duration_s": 6.5,
-      "characters": ["aunt", "daughters"],
+      "characters": [
+        "aunt",
+        "daughters"
+      ],
       "image_prompt": "Medium shot inside a modest home at early morning, the teacher gently braiding the hair of her younger daughter while the older daughter sits beside them at a small wooden table with bread and tea, warm lamplight, a window with first daylight",
       "seed": 1002,
       "motion": {
         "mode": "i2v",
         "prompt": "Her hands braid slowly, the older girl lifts her cup, the camera stays fixed.",
-        "kenburns": { "zoom_from": 1.12, "zoom_to": 1.0, "x_from": 0.5, "x_to": 0.5, "y_from": 0.42, "y_to": 0.5 }
+        "kenburns": {
+          "zoom_from": 1.12,
+          "zoom_to": 1,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.42,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "ሁለት ሴት ልጆች ነበሯት፤ በትዕግሥትና በፍቅር አሳደገቻቸው።",
@@ -112,13 +165,23 @@
       "reason": "Links home to school in one image: the three of them leave together, which is the hinge between her two roles.",
       "shot_size": "wide",
       "duration_s": 7.5,
-      "characters": ["aunt", "daughters"],
+      "characters": [
+        "aunt",
+        "daughters"
+      ],
       "image_prompt": "Wide shot from behind of the teacher walking hand in hand with her two daughters down a quiet Addis Ababa street in early morning light, jacaranda trees, low walls, long soft shadows, a blue and white minibus far in the distance",
       "seed": 1003,
       "motion": {
         "mode": "i2v",
         "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
-        "kenburns": { "zoom_from": 1.0, "zoom_to": 1.12, "x_from": 0.45, "x_to": 0.55, "y_from": 0.5, "y_to": 0.5 }
+        "kenburns": {
+          "zoom_from": 1,
+          "zoom_to": 1.12,
+          "x_from": 0.45,
+          "x_to": 0.55,
+          "y_from": 0.5,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "በየጠዋቱ ሦስቱም አብረው ይወጡ ነበር፤ ልጆቿ ለመማር፣ እሷ ደግሞ ለማስተማር።",
@@ -132,13 +195,22 @@
       "reason": "First sign of how the students felt about her: they are waiting before she arrives. Shows the love instead of only stating it.",
       "shot_size": "wide",
       "duration_s": 6.5,
-      "characters": ["aunt"],
-      "image_prompt": "Wide shot of a school gate in Addis Ababa in morning sun, a group of smiling schoolchildren in navy-blue sweaters running toward the teacher as she arrives, a simple school building and a flagpole behind, dust glowing in the light",
+      "characters": [
+        "aunt"
+      ],
+      "image_prompt": "Wide shot of a simple school gate in Addis Ababa in morning sun, the teacher walking in through the gate and smiling, a group of happy Ethiopian schoolchildren with warm brown skin, dark brown eyes and short black hair or braids, in navy-blue school sweaters standing together inside the schoolyard and waving hello to her, a plain low school building with bare walls and no signs, warm dust glowing in the light",
       "seed": 1004,
       "motion": {
         "mode": "i2v",
-        "prompt": "Children run toward her and gather round, she opens her arms slightly, the camera stays fixed.",
-        "kenburns": { "zoom_from": 1.0, "zoom_to": 1.1, "x_from": 0.6, "x_to": 0.5, "y_from": 0.5, "y_to": 0.5 }
+        "prompt": "The children wave, she raises a hand to greet them, the camera stays fixed.",
+        "kenburns": {
+          "zoom_from": 1,
+          "zoom_to": 1.1,
+          "x_from": 0.6,
+          "x_to": 0.5,
+          "y_from": 0.5,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "በትምህርት ቤቱ በር ላይ ተማሪዎቿ አስቀድመው ይጠብቋት ነበር።",
@@ -153,13 +225,22 @@
       "reason": "Says what she taught. Social studies gives the film its one concrete classroom image: the map and the globe.",
       "shot_size": "medium",
       "duration_s": 8,
-      "characters": ["aunt"],
+      "characters": [
+        "aunt"
+      ],
       "image_prompt": "Medium shot of the teacher standing at a green chalkboard in a simple classroom, pointing with a wooden pointer at a hand-drawn chalk outline of a country map with mountains and rivers, a small globe on her desk, sunlight through a side window",
       "seed": 1005,
       "motion": {
         "mode": "i2v",
         "prompt": "She traces the outline with the pointer and turns her head toward the class, the camera pushes in slowly.",
-        "kenburns": { "zoom_from": 1.0, "zoom_to": 1.12, "x_from": 0.5, "x_to": 0.5, "y_from": 0.5, "y_to": 0.42 }
+        "kenburns": {
+          "zoom_from": 1,
+          "zoom_to": 1.12,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.5,
+          "y_to": 0.42
+        }
       },
       "narration": {
         "am": "የኅብረተሰብ ሳይንስ መምህርት ነበረች፤ ስለ አገራችን፣ ስለ ሕዝቦቿና ስለ ታሪኳ ታስተምር ነበር።",
@@ -173,13 +254,22 @@
       "reason": "The close-up that carries her character: polite and kind even when correcting a child. This is the trait the family remembers.",
       "shot_size": "close_up",
       "duration_s": 7.5,
-      "characters": ["aunt"],
-      "image_prompt": "Close-up of the teacher bending down beside a wooden desk next to a small schoolboy, her face gentle and patient, one hand resting near his open exercise book, the boy looking up at her with trust, soft window light",
+      "characters": [
+        "aunt"
+      ],
+      "image_prompt": "Close-up of the teacher bending down beside a wooden desk next to a small Ethiopian schoolboy with warm brown skin, dark brown eyes and short black hair, her face gentle and patient, one hand resting near his open exercise book, the boy looking up at her with trust, soft window light",
       "seed": 1006,
       "motion": {
         "mode": "i2v",
         "prompt": "She nods and smiles softly, the boy looks up, the camera stays fixed.",
-        "kenburns": { "zoom_from": 1.04, "zoom_to": 1.16, "x_from": 0.5, "x_to": 0.5, "y_from": 0.45, "y_to": 0.4 }
+        "kenburns": {
+          "zoom_from": 1.04,
+          "zoom_to": 1.16,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.45,
+          "y_to": 0.4
+        }
       },
       "narration": {
         "am": "ለትንሹም ልጅ ትሑት ነበረች። ሲሳሳቱ በለስላሳ ቃል ታርማቸው ነበር።",
@@ -194,12 +284,19 @@
       "shot_size": "wide",
       "duration_s": 5,
       "characters": [],
-      "image_prompt": "Wide shot of a bright classroom full of smiling Ethiopian schoolchildren in navy-blue sweaters at wooden desks, many hands raised eagerly, seen from the front of the room, sunlight across the desks",
+      "image_prompt": "Wide shot of a bright classroom full of smiling Ethiopian schoolchildren with warm brown skin, dark brown eyes and short black hair or braids, in navy-blue school sweaters at wooden desks, many hands raised eagerly, seen from the front of the room, sunlight across the desks",
       "seed": 1007,
       "motion": {
         "mode": "kenburns",
         "prompt": "Hands go up one after another, the camera pans slowly across the class.",
-        "kenburns": { "zoom_from": 1.1, "zoom_to": 1.1, "x_from": 0.2, "x_to": 0.8, "y_from": 0.5, "y_to": 0.5 }
+        "kenburns": {
+          "zoom_from": 1.1,
+          "zoom_to": 1.1,
+          "x_from": 0.2,
+          "x_to": 0.8,
+          "y_from": 0.5,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "ለዚህም ነው ተማሪዎቹ ሁሉ የወደዷት።",
@@ -213,13 +310,22 @@
       "reason": "The heart of the film and the one detail only our family would know: she loved to hear the students sing. The longest shot, with the music at its fullest.",
       "shot_size": "medium",
       "duration_s": 10,
-      "characters": ["aunt"],
-      "image_prompt": "Medium shot of the teacher standing by her desk with her eyes closed and a peaceful smile, listening, her piece of chalk set down on the desk, while in front of her a row of schoolchildren sing with open mouths and bright faces, golden afternoon light",
+      "characters": [
+        "aunt"
+      ],
+      "image_prompt": "Medium shot of the teacher standing by her desk with her eyes closed and a peaceful smile, listening, a small stick of white chalk set down on the desk, while in front of her a row of Ethiopian schoolchildren with warm brown skin, dark brown eyes and short black hair or braids, in navy-blue school sweaters sing with open mouths and bright faces, golden afternoon light",
       "seed": 1008,
       "motion": {
         "mode": "i2v",
         "prompt": "The children sway gently as they sing, she tilts her head and smiles, the camera pushes in slowly toward her face.",
-        "kenburns": { "zoom_from": 1.0, "zoom_to": 1.18, "x_from": 0.5, "x_to": 0.5, "y_from": 0.5, "y_to": 0.4 }
+        "kenburns": {
+          "zoom_from": 1,
+          "zoom_to": 1.18,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.5,
+          "y_to": 0.4
+        }
       },
       "narration": {
         "am": "ከሁሉ በላይ ግን ተማሪዎቿ ሲዘምሩ መስማት ትወድ ነበር። የፈለጉትን መዝሙር ቢዘምሩ፣ ጠመኔዋን አስቀምጣ ታዳምጣቸው ነበር።",
@@ -234,13 +340,23 @@
       "reason": "Returns to the home from shot 2 to close the circle: after a day of other people's children she is a mother again.",
       "shot_size": "medium",
       "duration_s": 7.5,
-      "characters": ["aunt", "daughters"],
+      "characters": [
+        "aunt",
+        "daughters"
+      ],
       "image_prompt": "Medium shot in the evening at home, the teacher sitting at a wooden table under a warm lamp marking a stack of exercise books, her two daughters beside her doing their homework, dark blue window behind, cosy and quiet",
       "seed": 1009,
       "motion": {
         "mode": "i2v",
         "prompt": "She turns a page, one daughter leans against her shoulder, the lamp light flickers faintly, the camera stays fixed.",
-        "kenburns": { "zoom_from": 1.14, "zoom_to": 1.02, "x_from": 0.5, "x_to": 0.5, "y_from": 0.45, "y_to": 0.5 }
+        "kenburns": {
+          "zoom_from": 1.14,
+          "zoom_to": 1.02,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.45,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "ማታ ደግሞ ወደ እናትነቷ ትመለስ ነበር፤ ሁለቱ ልጆቿ ከጎኗ፣ ደብተሮቹ ጠረጴዛው ላይ።",
@@ -255,12 +371,19 @@
       "shot_size": "insert",
       "duration_s": 10,
       "characters": [],
-      "image_prompt": "Close view of a single piece of white chalk resting on the wooden ledge of a green chalkboard in an empty classroom at golden hour, chalk dust floating in a beam of sunlight, rows of empty wooden desks softly out of focus, an open door with bright light beyond",
+      "image_prompt": "Close view of one short small stick of white blackboard chalk, the size of a finger, resting on the wooden ledge of a green chalkboard in an empty classroom at golden hour, chalk dust floating in a beam of sunlight, rows of empty wooden desks softly out of focus, an open door with bright light beyond",
       "seed": 1010,
       "motion": {
         "mode": "kenburns",
         "prompt": "Chalk dust drifts in the light, the camera pulls back slowly toward the open door.",
-        "kenburns": { "zoom_from": 1.2, "zoom_to": 1.0, "x_from": 0.5, "x_to": 0.5, "y_from": 0.55, "y_to": 0.5 }
+        "kenburns": {
+          "zoom_from": 1.2,
+          "zoom_to": 1,
+          "x_from": 0.5,
+          "x_to": 0.5,
+          "y_from": 0.55,
+          "y_to": 0.5
+        }
       },
       "narration": {
         "am": "የመምህር ሥራ በክፍል ውስጥ አይቀርም፤ በእያንዳንዱ ልጅ ልብ ውስጥ ሆኖ ከበሩ ይወጣል። ይህ ለአክስቴ ነው።",

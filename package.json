@@ -21,7 +21,8 @@
     "costs": "node pipeline/costs.ts",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"pipeline/tests/*.test.ts\"",
-    "ui": "node pipeline/ui/server.ts"
+    "ui": "node pipeline/ui/server.ts",
+    "kaggle": "node pipeline/kaggle.ts"
   },
   "dependencies": {
     "ajv": "^8.17.1",

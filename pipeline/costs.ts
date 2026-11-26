@@ -22,7 +22,7 @@ function table(title: string, rows: Map<string, Row>): string {
   const lines = [
     `### ${title}`,
     "",
-    "| | Model calls ok | Failed attempts | Cache hits | Local renders | Fallbacks | Model latency total (s) | Mean per call (s) | Local render total (s) | GPU minutes | List-price equivalent (USD) |",
+    "| | Model calls ok | Failed attempts | Cache hits | Local renders | Fallbacks | Model latency total (s) | Mean per call (s) | Local and Kaggle-job wall time (s) | GPU minutes | List-price equivalent (USD) |",
     "|---|---|---|---|---|---|---|---|---|---|---|",
   ];
   for (const [name, r] of rows) {
@@ -42,6 +42,10 @@ export async function runCosts(): Promise<void> {
     const row = map.get(key) ?? emptyRow();
     map.set(key, row);
     if (entry.event === "cache_hit") row.cache_hits++;
+    else if (entry.event === "remote_job") {
+      // Whole Kaggle runs: queue, install, download. Counted as wall time, not as model calls.
+      row.local_latency_ms += entry.latency_ms ?? 0;
+    }
     else if (entry.event === "fallback") row.fallbacks++;
     else if (entry.event === "local_render") {
       row.local_renders++;

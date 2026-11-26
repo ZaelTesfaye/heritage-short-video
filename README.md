@@ -37,6 +37,9 @@ All three are free and need no payment card. They go in `.env`, which is git-ign
 | `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com) → Get API key | Narration (text to speech), translation |
 | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard → Workers AI → Use REST API | Keyframes |
 | `CLOUDFLARE_API_TOKEN` | Same page, "Create a Workers AI API token" | Keyframes |
+| `KAGGLE_API_TOKEN` | kaggle.com → Settings → API → Create New Token (phone verification required for GPUs). Optional | Music and image-to-video on a free GPU |
+
+The Kaggle stages also need the Kaggle command-line client, which is Python: `pip install kaggle`.
 
 Check that every provider answers before a long run:
 
@@ -49,6 +52,9 @@ npm run smoke
 | Command | What it does |
 |---|---|
 | `npm run film` | Validate → narration → keyframes → music → shots → assemble |
+| `npm run film -- --remote` | The same, but first runs the GPU stages on Kaggle: ACE-Step score candidates, and Wan 2.2 clips for shots marked `i2v` |
+| `npm run kaggle -- music` | Only the Kaggle music job |
+| `npm run kaggle -- video --only s03,s09` | Only the Kaggle image-to-video job, for the named shots |
 | `npm run radio` | Narration over placeholder music on a black screen: the prototype for the first user test |
 | `npm run validate` | Check `storyboard.json` against the schema and the cross-field rules |
 | `npm run smoke` | Call each provider once and log its latency |
@@ -110,7 +116,7 @@ storyboard.json ──► validate ──► narration ──► keyframes ─�
 
 ### The GPU stages
 
-Wan 2.2 and ACE-Step need a GPU, so they run in Kaggle notebooks under [kaggle/](kaggle/). The pipeline writes a job file for each (`outputs/kaggle/wan_jobs.json`, `outputs/kaggle/music_job.json`), the notebook reads it and writes clips or music candidates plus its own call log, and the next `npm run film` picks those up. Without them the film still builds: shots fall back to a slow pan-and-zoom over the keyframe and the music falls back to a placeholder pad, and each fallback is recorded in `runs.jsonl`.
+Wan 2.2 and ACE-Step need a GPU, so they run on Kaggle. The scripts in [kaggle/](kaggle/) are the notebooks. [pipeline/kaggle.ts](pipeline/kaggle.ts) does the hand-off from this machine: it writes the job from the storyboard, uploads keyframes as a private dataset, pushes the notebook to run on a T4, waits, downloads the results into `outputs/`, and copies the notebook's own log of each model call into `runs.jsonl`. A clip carries the hash of the keyframe, prompt and seed it was made from, and is ignored once any of them changes. Without them the film still builds: shots fall back to a slow pan-and-zoom over the keyframe and the music falls back to a placeholder pad, and each fallback is recorded in `runs.jsonl`.
 
 ## What it costs
 

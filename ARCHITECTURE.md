@@ -109,7 +109,15 @@ Every skipped step writes a `cache_hit` line to `runs.jsonl`, so a rerun shows e
 
 **Partial runs.** Outputs are written and recorded one at a time, so a run that dies at shot 7 resumes at shot 7.
 
-**The Kaggle hand-off.** GPU stages cannot run locally, so they are decoupled by files. The pipeline writes a job file; a notebook runs the jobs, saves each result as it finishes, and appends one line per model call to its own results log; the next local run copies those lines into `runs.jsonl` once, marked `remote_ingest`.
+**The Kaggle hand-off.** GPU stages cannot run locally, so they are decoupled by files, and [pipeline/kaggle.ts](pipeline/kaggle.ts) drives them through the Kaggle command-line client:
+
+1. Write the job from the storyboard (prompts, seeds, the input hash of each clip).
+2. For image-to-video, upload the needed keyframes as a private Kaggle dataset.
+3. Push the notebook with the job embedded, on a T4 GPU with internet on, and poll its status every 30 seconds.
+4. Download its outputs, retrying while partial files remain, and copy clips and music into `outputs/`.
+5. Copy the notebook's own results log into `runs.jsonl` once, as `remote_ingest` lines, plus one `remote_job` line for the whole run.
+
+Inside the notebook, each clip or track is saved as soon as it finishes, so a run that times out still returns what it made. A clip is used locally only while the hash it carries matches the current keyframe, motion prompt and seed. If Kaggle is unavailable, `npm run film` without `--remote` still builds the film from whatever exists, with the fallbacks below.
 
 ## The sound mix
 

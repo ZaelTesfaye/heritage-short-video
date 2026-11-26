@@ -12,3 +12,8 @@ Thumbs.db
 
 # Drafts from the story-to-storyboard step, kept out until reviewed.
 storyboard.draft.json
+
+# Kaggle hand-off scratch: uploads and raw downloads. Results are copied into outputs/ and runs.jsonl.
+outputs/kaggle/push/
+outputs/kaggle/pull/
+outputs/kaggle/dataset/

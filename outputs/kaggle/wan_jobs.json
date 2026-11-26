@@ -1,0 +1,149 @@
+{
+  "model": "Wan-AI/Wan2.2-TI2V-5B",
+  "clip_seconds": 5,
+  "fps": 24,
+  "draft_resolution": "480p",
+  "results_log": "outputs/clips/results.jsonl",
+  "jobs": [
+    {
+      "shot": "s02",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s02.png",
+      "prompt": "Her hands braid slowly, the older girl lifts her cup, the camera stays fixed.",
+      "seed": 1002,
+      "input_hash": "a24117e58b2bc8c8",
+      "output": "outputs/clips/vertical/s02.mp4",
+      "meta": "outputs/clips/vertical/s02.json"
+    },
+    {
+      "shot": "s03",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s03.png",
+      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
+      "seed": 1003,
+      "input_hash": "58abb2ec73277272",
+      "output": "outputs/clips/vertical/s03.mp4",
+      "meta": "outputs/clips/vertical/s03.json"
+    },
+    {
+      "shot": "s04",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s04.png",
+      "prompt": "The children wave, she raises a hand to greet them, the camera stays fixed.",
+      "seed": 1004,
+      "input_hash": "4382ac9e4add0e07",
+      "output": "outputs/clips/vertical/s04.mp4",
+      "meta": "outputs/clips/vertical/s04.json"
+    },
+    {
+      "shot": "s05",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s05.png",
+      "prompt": "She traces the outline with the pointer and turns her head toward the class, the camera pushes in slowly.",
+      "seed": 1005,
+      "input_hash": "83bde2a69c3ab08d",
+      "output": "outputs/clips/vertical/s05.mp4",
+      "meta": "outputs/clips/vertical/s05.json"
+    },
+    {
+      "shot": "s06",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s06.png",
+      "prompt": "She nods and smiles softly, the boy looks up, the camera stays fixed.",
+      "seed": 1006,
+      "input_hash": "ecb9e577608bbe72",
+      "output": "outputs/clips/vertical/s06.mp4",
+      "meta": "outputs/clips/vertical/s06.json"
+    },
+    {
+      "shot": "s08",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s08.png",
+      "prompt": "The children sway gently as they sing, she tilts her head and smiles, the camera pushes in slowly toward her face.",
+      "seed": 1008,
+      "input_hash": "17881089ea63a254",
+      "output": "outputs/clips/vertical/s08.mp4",
+      "meta": "outputs/clips/vertical/s08.json"
+    },
+    {
+      "shot": "s09",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s09.png",
+      "prompt": "She turns a page, one daughter leans against her shoulder, the lamp light flickers faintly, the camera stays fixed.",
+      "seed": 1009,
+      "input_hash": "c67ffcdbe5f49850",
+      "output": "outputs/clips/vertical/s09.mp4",
+      "meta": "outputs/clips/vertical/s09.json"
+    },
+    {
+      "shot": "s02",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s02.png",
+      "prompt": "Her hands braid slowly, the older girl lifts her cup, the camera stays fixed.",
+      "seed": 1002,
+      "input_hash": "1ec94115c173f55f",
+      "output": "outputs/clips/horizontal/s02.mp4",
+      "meta": "outputs/clips/horizontal/s02.json"
+    },
+    {
+      "shot": "s03",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s03.png",
+      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
+      "seed": 1003,
+      "input_hash": "9b8698f308e790af",
+      "output": "outputs/clips/horizontal/s03.mp4",
+      "meta": "outputs/clips/horizontal/s03.json"
+    },
+    {
+      "shot": "s04",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s04.png",
+      "prompt": "The children wave, she raises a hand to greet them, the camera stays fixed.",
+      "seed": 1004,
+      "input_hash": "e41b767252c10d67",
+      "output": "outputs/clips/horizontal/s04.mp4",
+      "meta": "outputs/clips/horizontal/s04.json"
+    },
+    {
+      "shot": "s05",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s05.png",
+      "prompt": "She traces the outline with the pointer and turns her head toward the class, the camera pushes in slowly.",
+      "seed": 1005,
+      "input_hash": "b94d1bfcc38b9652",
+      "output": "outputs/clips/horizontal/s05.mp4",
+      "meta": "outputs/clips/horizontal/s05.json"
+    },
+    {
+      "shot": "s06",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s06.png",
+      "prompt": "She nods and smiles softly, the boy looks up, the camera stays fixed.",
+      "seed": 1006,
+      "input_hash": "e62a049a51282de0",
+      "output": "outputs/clips/horizontal/s06.mp4",
+      "meta": "outputs/clips/horizontal/s06.json"
+    },
+    {
+      "shot": "s08",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s08.png",
+      "prompt": "The children sway gently as they sing, she tilts her head and smiles, the camera pushes in slowly toward her face.",
+      "seed": 1008,
+      "input_hash": "0a04295d59da520f",
+      "output": "outputs/clips/horizontal/s08.mp4",
+      "meta": "outputs/clips/horizontal/s08.json"
+    },
+    {
+      "shot": "s09",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s09.png",
+      "prompt": "She turns a page, one daughter leans against her shoulder, the lamp light flickers faintly, the camera stays fixed.",
+      "seed": 1009,
+      "input_hash": "ed2d897e1b400ef0",
+      "output": "outputs/clips/horizontal/s09.mp4",
+      "meta": "outputs/clips/horizontal/s09.json"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "model": "Wan-AI/Wan2.2-TI2V-5B",
+  "clip_seconds": 5,
+  "fps": 24,
+  "draft_resolution": "480p",
+  "results_log": "outputs/clips/results.jsonl",
+  "jobs": [
+    {
+      "shot": "s03",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s03.png",
+      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
+      "seed": 1003,
+      "input_hash": "58abb2ec73277272",
+      "output": "outputs/clips/vertical/s03.mp4",
+      "meta": "outputs/clips/vertical/s03.json",
+      "keyframe_file": "vertical_s03.png"
+    },
+    {
+      "shot": "s09",
+      "aspect": "vertical",
+      "keyframe": "outputs/keyframes/vertical/s09.png",
+      "prompt": "She turns a page, one daughter leans against her shoulder, the lamp light flickers faintly, the camera stays fixed.",
+      "seed": 1009,
+      "input_hash": "c67ffcdbe5f49850",
+      "output": "outputs/clips/vertical/s09.mp4",
+      "meta": "outputs/clips/vertical/s09.json",
+      "keyframe_file": "vertical_s09.png"
+    },
+    {
+      "shot": "s03",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s03.png",
+      "prompt": "The three walk slowly away from the camera, leaves move in a light wind, the camera follows gently.",
+      "seed": 1003,
+      "input_hash": "9b8698f308e790af",
+      "output": "outputs/clips/horizontal/s03.mp4",
+      "meta": "outputs/clips/horizontal/s03.json",
+      "keyframe_file": "horizontal_s03.png"
+    },
+    {
+      "shot": "s09",
+      "aspect": "horizontal",
+      "keyframe": "outputs/keyframes/horizontal/s09.png",
+      "prompt": "She turns a page, one daughter leans against her shoulder, the lamp light flickers faintly, the camera stays fixed.",
+      "seed": 1009,
+      "input_hash": "ed2d897e1b400ef0",
+      "output": "outputs/clips/horizontal/s09.mp4",
+      "meta": "outputs/clips/horizontal/s09.json",
+      "keyframe_file": "horizontal_s09.png"
+    }
+  ]
+}

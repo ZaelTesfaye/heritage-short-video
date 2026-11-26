@@ -67,3 +67,26 @@ What broke, what was tried, and what fixed it. Newest last. Every entry is somet
 - **What happened:** `gemini-3.8-flash` returned `503 ... currently experiencing high demand` on all four attempts, 99 s in total. The speech model answered normally at the same moment.
 - **Status:** not a blocker for the film, since narration is written in the storyboard. The story-drafting step depends on it, so it is retried later.
 - **Evidence:** `runs.jsonl`, stage `smoke`, shot `text`.
+
+## F09. Cloudflare's safety filter refused harmless pictures, at random
+
+- **When:** 2026-11-26, the first full keyframe run.
+- **What happened:** three outputs came back as `400 AiError: Your output has been flagged. Please choose another prompt / input image combination` (code 3030): shot s04 (children greeting the teacher at the school gate), shot s05 vertical (the teacher at a chalkboard), and shot s10 horizontal (a piece of chalk in an empty classroom). The first failure stopped the whole stage.
+- **What it showed:** the same prompt passed in the other aspect ratio for s05 and s10, and s10 has no person in it at all. So the filter is reacting to particular random outputs, not to the words of the prompt. Rewording s04 did get it through.
+- **What fixed it:**
+  1. The keyframe stage no longer stops at a refused shot. It finishes the others and lists the failures at the end.
+  2. A flagged output is retried with the next seed in a fixed sequence (seed, +1000, +2000), so the result is still reproducible. The seed actually used is written to `runs.jsonl` as a `fallback` line.
+- **Evidence:** `runs.jsonl`, stage `keyframes`, status `error` with `flagged`; the request ids are in the error text.
+
+## F10. The connection here is about 35 KB/s, which makes Kaggle downloads the slow part
+
+- **When:** 2026-11-26.
+- **What happened:** each 85-second WAV from Kaggle is about 16 MB, and downloading one took over six minutes. Each FLUX keyframe took about 42 seconds, mostly transfer. The first download also stopped partway and left a `.kaggle-partial` file.
+- **What I did:** the runner now retries a download until no partial files remain. The GPU jobs were kept small (three music candidates, a handful of short clips at 480p-class resolution).
+- **What I would change:** write the score as FLAC or MP3 on Kaggle to cut the download several times over.
+
+## F11. The first music download could not be copied into place
+
+- **When:** 2026-11-26.
+- **What happened:** `ENOENT ... copyfile ... outputs/music/candidates/cand_a.wav`. The runner copied candidates into a folder it had never created.
+- **What fixed it:** create the folder first, and copy only finished `.wav` files.

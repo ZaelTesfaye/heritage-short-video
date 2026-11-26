@@ -15,7 +15,8 @@ export type RunEvent =
   | "local_render" // a deterministic FFmpeg step
   | "cache_hit" // inputs unchanged, output reused, no call made
   | "fallback" // a planned model output was unavailable and a fallback was used
-  | "remote_ingest"; // a call that ran on Kaggle, copied in from the notebook's own log
+  | "remote_ingest" // a call that ran on Kaggle, copied in from the notebook's own log
+  | "remote_job"; // one Kaggle notebook run as a whole: upload, queue, run and download
 
 export interface RunEntry {
   stage: string;

@@ -1,0 +1,44 @@
+{
+  "model": "ACE-Step/ACE-Step-1.5",
+  "caption": "Gentle instrumental film score, nostalgic and tender, a softly plucked lyre in a pentatonic scale over warm felt piano and quiet sustained strings, sparse and intimate, no drums, no lead vocal, leaves room for a narrator",
+  "instrumental": true,
+  "bpm": 70,
+  "key": "C major",
+  "duration_s": 85,
+  "candidates": [
+    {
+      "id": "cand_a",
+      "seed": 11,
+      "output": "outputs/music/candidates/cand_a.wav"
+    },
+    {
+      "id": "cand_b",
+      "seed": 23,
+      "output": "outputs/music/candidates/cand_b.wav"
+    },
+    {
+      "id": "cand_c",
+      "seed": 47,
+      "output": "outputs/music/candidates/cand_c.wav"
+    }
+  ],
+  "cues": [
+    {
+      "shot": "s01",
+      "note": "Enter softly with the lyre alone."
+    },
+    {
+      "shot": "s04",
+      "note": "Piano joins as the children appear; a little more warmth."
+    },
+    {
+      "shot": "s08",
+      "note": "The theme returns at its fullest while the children sing."
+    },
+    {
+      "shot": "s10",
+      "note": "Resolve and fade under the last line, out by the end card."
+    }
+  ],
+  "results_log": "outputs/music/candidates/results.jsonl"
+}

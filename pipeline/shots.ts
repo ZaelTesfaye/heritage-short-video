@@ -29,7 +29,7 @@ function videoJobHash(shot: Shot, keyframe: string): string {
 }
 
 /** The job file the Kaggle notebook reads: one entry per image-to-video shot whose keyframe exists. */
-function writeVideoJobs(sb: Storyboard): void {
+export function writeVideoJobs(sb: Storyboard): void {
   const video = loadConfig().models.video;
   const jobs = [];
   for (const aspect of ["vertical", "horizontal"] as Aspect[]) {
