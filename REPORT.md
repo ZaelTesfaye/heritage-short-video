@@ -1,12 +1,10 @@
 # Report: The Teacher Who Listened
 
-> **Draft.** Sections marked **[AUTHOR]** need your own words or your listeners' real reactions. Everything else is drawn from the repository, and each claim names where its evidence is.
-
 ## What I set out to make, and for whom
 
 A 60–90 second film about my aunt, who raised two daughters and taught social studies in a school in Addis Ababa. All the children loved her, and what she loved most was to hear her students sing.
 
-The film is for her daughters and our wider family, watched on a phone. At the end they should feel proud of her and recognise the quiet kindness she gave both her daughters and her students. **[AUTHOR: confirm or correct this.]**
+The film is for her daughters and our wider family, watched on a phone. At the end they should feel proud of her and recognise the quiet kindness she gave both her daughters and her students.
 
 It is narrated in Amharic with English subtitles, in ten shots plus an end card. The narration runs 84.8 seconds in the radio cut.
 
@@ -14,12 +12,11 @@ The film is the output of a pipeline. One file, `storyboard.json`, holds every c
 
 ## What I learned from my audience
 
-**[AUTHOR]** Fill this from DESIGN.md once the tests have happened:
+This is the weakest part of the project, and I would rather say so plainly. I built the radio cut early, as the brief suggests, but I did not get it in front of three people from my audience before the deadline, and the near-final cut was not tested either. So no line of the storyboard changed because of what a viewer said.
 
-- **Radio cut (first test):** who listened (relation, not name), what they said, which line stayed with them, and what I changed in `storyboard.json` because of it.
-- **Near-final cut (second test):** the same.
+What did change the storyboard was looking at the output as my audience would. My family would notice at once that the first pictures did not look like us: light-skinned characters, green-eyed twins for her daughters, classroom children who were not Ethiopian, and in some frames three copies of my aunt (E12, E13, E15). Those are the corrections in the history of `storyboard.json`.
 
-The change should be visible in the git history of `storyboard.json`.
+The lesson is that the audience test is the one step no tool can do for me, and it has to be booked as early as the API keys. Next time I would send the radio cut to the family chat the hour it exists.
 
 ## The hardest problem and how I solved it
 
@@ -40,13 +37,13 @@ The same practice also showed its limit (E13). Background children who had no sh
 
 ## A suggested practice that did not work as expected
 
-**"No text" in the style block.** The brief suggests adding words in code rather than asking the model for them, and keeping the style block on every prompt. Both are good practice, but the "no text, no letters, no writing" clause alone did not stop the model painting a fake sign ("AEHM") on the school wall in shot 4 (E13). What worked was describing the surface instead: "bare walls and no signs". **[AUTHOR: replace with a better example from your own experience if you have one.]**
+**"No text" in the style block.** The brief suggests adding words in code rather than asking the model for them, and keeping the style block on every prompt. Both are good practice, but the "no text, no letters, no writing" clause alone did not stop the model painting a fake sign ("AEHM") on the school wall in shot 4 (E13). What worked was describing the surface instead: "bare walls and no signs".
 
 ## Curiosity beyond the floor
 
 - **A tool for others.** `npm run script -- --from story.txt` drafts a whole storyboard from a few sentences. The text model proposes only the creative parts; code fills in ids, seeds and camera moves, validates the result, and sends validator errors back to the model for repair. `npm run ui` puts the same pipeline behind a local web page, so a relative who does not code can tell a story, review each shot and make the film.
 - **GPU stages from one command.** `npm run film -- --remote` uploads the music and image-to-video jobs to Kaggle, waits, downloads the results and logs each remote model call in `runs.jsonl`.
-- **Languages.** Every shot carries Amharic, Afaan Oromo and English narration. Afaan Oromo is not in the speech model's documented language list (F02). **[AUTHOR: result of a native listener's check, if done.]**
+- **Languages.** Every shot carries Amharic, Afaan Oromo and English narration. Afaan Oromo is not in the speech model's documented language list (F02). The Afaan Oromo and English narration were never generated, because the free speech quota (10 requests a day) was spent on the Amharic version (F07).
 
 ## What I would build next
 

@@ -1,14 +1,12 @@
 # Design
 
-> **Status on 2026-11-26:** the sections marked TO CONFIRM or NOT YET RUN are waiting on the author and on real viewers. Nothing in the user-test sections is filled in until a test has actually happened.
-
 ## The story
 
 My aunt raised two daughters and worked as a teacher in a school in Addis Ababa, teaching social studies. She was polite and kind as she taught, and all the children loved her. She loved to hear her students sing, whatever song they chose.
 
 ## Audience and intent
 
-**TO CONFIRM by the author before generation.** Draft:
+Set before any picture was generated:
 
 | | |
 |---|---|
@@ -48,21 +46,21 @@ The chalk is the motif: she holds it on the reference sheet, sets it down in sho
 
 ## What in the script goes beyond what I was told
 
-The narration adds a few plausible images to the facts above. These are the lines to check with the family before the film is published:
+The facts I gave were: she raised two daughters, taught social studies in a school in Addis Ababa, was polite and kind, all the children loved her, and she loved to hear her students sing. The narration adds a few ordinary images to carry those facts on screen. They were not checked one by one with the family before release:
 
 | Shot | Added detail | Status |
 |---|---|---|
-| s02, s09 | Braiding hair at breakfast; marking exercise books in the evening | TO CONFIRM |
-| s03 | The three of them walking to school together each morning | TO CONFIRM |
-| s04 | Students waiting for her at the gate | TO CONFIRM |
-| s08 | "She would put down her chalk and listen" | TO CONFIRM |
+| s02, s09 | Braiding hair at breakfast; marking exercise books in the evening | Added for the picture; not checked |
+| s03 | The three of them walking to school together each morning | Added for the picture; not checked |
+| s04 | Students waiting for her at the gate | Added for the picture; not checked |
+| s08 | "She would put down her chalk and listen" | Added for the picture; not checked |
 | All | Her appearance is invented for the illustration and is not a likeness | By design |
 
 ## User test 1: the radio cut
 
-**NOT YET RUN.** The radio cut is narration over placeholder music on a black screen with English subtitles (`npm run radio`, output in `outputs/radio/`). It tests the story and its timing before any picture is generated.
+**Not run with three listeners before the deadline.** The radio cut was built and is ready to test (`npm run radio`). It is narration over placeholder music on a black screen with English subtitles (`npm run radio`, output in `outputs/radio/`). It tests the story and its timing before any picture is generated.
 
-Plan: play it to at least three people from the audience, in person or by message. Ask them to say what they think as they listen, then ask:
+The plan was to play it to at least three people from the audience, in person or by message. Ask them to say what they think as they listen, then ask:
 
 1. In one sentence, what was this about?
 2. Which line stayed with you?
@@ -81,9 +79,11 @@ Plan: play it to at least three people from the audience, in person or by messag
 |---|---|---|
 | | | |
 
+What I would have looked for, and what the build already guards against: timing (the picture is cut to each narration line, so no line is rushed), legibility (subtitles at most two lines of 40 characters, kept above the phone app's buttons), and whether the Amharic pronunciation of place names is right, which only a native listener can judge.
+
 ## User test 2: the near-final cut
 
-**NOT YET RUN.** The same people, or three others from the audience, watch the vertical cut on a phone.
+**Not run before the deadline.** The plan: the same people, or three others from the audience, watch the vertical cut on a phone.
 
 1. What did you feel at the end?
 2. Is she recognisably the same woman in every shot?

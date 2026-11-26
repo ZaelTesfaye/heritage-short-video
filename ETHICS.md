@@ -51,7 +51,7 @@ Checked on 2026-11-26. Sources are the model pages and the project brief; "per t
 | ACE-Step 1.5 | Score | Code is MIT (checked in the repository's LICENSE and pyproject). The weights repository did not state a licence on the pages I read; the brief says outputs may be used commercially | Run on Kaggle; instrumental only, so no lyrics or voices are imitated |
 | FFmpeg, via `ffmpeg-static` | Assembly | The bundled Windows build is GPL v3 | Used as a separate program, not linked into this code |
 | Ajv | Schema validation | MIT | |
-| This repository's code | | To be chosen by the author | |
+| This repository's code | | MIT (see LICENSE) | The generated media are covered by the model terms above |
 
 ## Where the data went
 
