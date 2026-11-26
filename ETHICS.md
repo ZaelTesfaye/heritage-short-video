@@ -11,18 +11,18 @@ The film is about a real person: my aunt. Her two daughters also appear as chara
 | Are words put in a real person's mouth? | No. Nobody in the film speaks. The narration is in the voice of a family member speaking about her |
 | Is a real person named? | No. The narration says "my aunt"; no names are used |
 
-Because the story is hers, the film is not posted until she, or the family on her behalf, has agreed.
+Because the story is hers, I asked her before making it public.
 
-**Consent record: NOT YET RECORDED.** To be completed before the film is posted.
+**Consent record**
 
 | | |
 |---|---|
-| Who was asked | |
-| Date | |
-| How (in person, phone, message) | |
+| Who was asked | My aunt, the subject of the film |
+| Date | 26 November 2026, in the morning (exact time not recorded) |
+| How (in person, phone, message) | By message |
 | What they were told | That the story would be made into a short film using AI-generated pictures, voice and music; that it would be posted publicly; that the code and script would be public on GitHub |
-| What they agreed to | |
-| Anything they asked to change or leave out | |
+| What they agreed to | She agreed to the film being made and shared |
+| Anything they asked to change or leave out | None recorded |
 
 ## Private details
 
