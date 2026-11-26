@@ -26,7 +26,9 @@ The finished files appear in `outputs/film/am/`:
 | `heritage_am_horizontal.mp4` | 1920×1080 (16:9) |
 | `heritage_am.en.srt` | The English subtitles as a separate file |
 
-The generated images, audio and exports are committed in `outputs/`, so a fresh clone reuses them: `npm run film` re-renders the video segments locally and calls no model. To regenerate everything from the storyboard with real model calls, run `npm run film -- --force`.
+Every model output the film needs is committed in `outputs/`: the narration, the reference sheets and keyframes, the chosen score and the Wan 2.2 clips. So a fresh clone needs **no keys** to rebuild the film: `npm run film` finds every model step in the cache, calls no model, and only re-renders the FFmpeg steps (about 10 minutes on a laptop). The finished MP4s themselves are not committed, to keep the repository small; they are rebuilt by that command, and the published films are linked in the submission.
+
+To regenerate everything from the storyboard with real model calls, fill in `.env` and run `npm run film -- --force --remote`.
 
 ### Setup: the keys
 

@@ -17,3 +17,10 @@ storyboard.draft.json
 outputs/kaggle/push/
 outputs/kaggle/pull/
 outputs/kaggle/dataset/
+
+# Finished films and mixes are rebuilt by `npm run film`; the published films are linked in the submission.
+outputs/film/
+outputs/smoke/
+outputs/music/placeholder.wav
+outputs/music/candidates/cand_a.wav
+outputs/music/candidates/cand_b.wav
