@@ -1,0 +1,33 @@
+{
+  "name": "heritage-short",
+  "version": "1.0.0",
+  "description": "A storyboard-driven pipeline that turns storyboard.json into a narrated, scored, subtitled short film.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "film": "node pipeline/run.ts film",
+    "radio": "node pipeline/run.ts radio",
+    "validate": "node pipeline/validate.ts",
+    "smoke": "node pipeline/smoke.ts",
+    "script": "node pipeline/script.ts",
+    "narration": "node pipeline/narration.ts",
+    "keyframes": "node pipeline/keyframes.ts",
+    "shots": "node pipeline/shots.ts",
+    "music": "node pipeline/music.ts",
+    "assemble": "node pipeline/assemble.ts",
+    "costs": "node pipeline/costs.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"pipeline/tests/*.test.ts\""
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ffmpeg-static": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
