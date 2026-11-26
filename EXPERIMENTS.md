@@ -56,17 +56,29 @@ Each entry is hypothesis → change → result. One thing changes per experiment
 - **Not done:** the blind preference test with at least three viewers.
 - **Evidence:** `outputs/clips/vertical/`, `remote_ingest` lines in `runs.jsonl`, F13 in FAILURES.md.
 
-## Planned
+### E14. Can a frontier video model be compared for free?
 
-Hypotheses are written down before the runs. Results are empty until the runs happen.
+- **Hypothesis:** Gemini Omni 1.2 Flash, which the key lists, can make one 3-second image-to-video shot on the free tier for a comparison with Wan 2.2.
+- **Change:** one call for shot s03, vertical, 3 s at 360p, the smallest setting.
+- **Result:** rejected. `429 ... limit: 0 requests per day on Free Tier`. A model appearing in the list does not mean the free tier can call it. No comparison was possible (F12).
+
+### E15. Does a three-view reference sheet make the character repeat?
+
+- **Hypothesis:** conditioning on the reference sheet keeps the aunt consistent in every shot (the practice the brief recommends).
+- **Change:** none at first; observed in the first full run, then one change at a time on shots s03, s04 and s05.
+- **Result:** partly rejected. When the aunt stands alone facing the viewer, the model copied the sheet itself: three of her in s04 and s05, two in s03 horizontal. Adding "only one adult woman appears" fixed s04 but made s05 vertical worse (three copies where there had been one). What worked was turning the reference sheet off for s03 and s05 only (`use_reference_sheets: false`, a per-shot switch added to the schema) and relying on the explicit text description, which already fixed her look after E12. Both shots now show one woman who still matches her cardigan, shawl and dress.
+- **What it taught me:** a reference image carries its layout as well as the face. A sheet with three poses is a good consistency tool for medium shots with other people in them, and a bad one for a single standing figure.
+- **Evidence:** `outputs/experiments/e15_duplicates_v1/`, `use_reference_sheets` in `storyboard.json` and the schema.
+
+## Not run
+
+These hypotheses were written down before the runs and were not tested in time. E05, E07 and E08 were answered by observation inside E12, E13 and E15 instead.
+
 
 | # | Hypothesis | Change (everything else fixed) | How it will be judged | Result |
 |---|---|---|---|---|
 | E02 | A style passed as speech metadata gives warmer, slower narration than no style, without being read aloud | Shot s01 in Amharic with and without `narration.style` | Audio length in `runs.jsonl`; a native listener's preference | |
 | E03 | The voice matters less than the style instruction | Shot s01 with three voices (Sulafat, Achernar, Vindemiatrix), same style | A native listener ranks them | |
 | E04 | The speech model handles Amharic well but mispronounces or refuses Afaan Oromo, which is not in its language list | Shots s01 and s05 in `am`, `om` and `en` | A native speaker of each marks every wrong word | |
-| E05 | Conditioning keyframes on a reference sheet keeps the aunt recognisably the same; the same prompts without the sheet drift | Shots s02, s05, s08 with and without the reference image, same seeds | Side by side: face, hair, shawl, cardigan and dress matched per shot | |
 | E06 | FLUX.2 klein follows a long scene prompt better than FLUX.1 schnell | Shot s05 on both models, same prompt and seed | Count of requested elements present: chalkboard, map, pointer, globe, window light | |
-| E07 | Keeping "no text" in the style block stops garbled writing on the chalkboard | Shot s05 with and without the last clause of the style block | Whether lettering appears on the board | |
-| E08 | The same prompt and seed at 9:16 and 16:9 give a composition that works in both, so one storyboard serves both exports | All shots in both aspects | Count of shots where the subject is cut off or off-centre | |
 | E09 | The brief's starting ducking settings leave the narration clear over the score | Threshold 0.02 against 0.05, same mix | A listener on a phone speaker; measured loudness in `runs.jsonl` | |
