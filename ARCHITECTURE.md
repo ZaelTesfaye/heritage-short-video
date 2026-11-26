@@ -122,6 +122,12 @@ Every skipped step writes a `cache_hit` line to `runs.jsonl`, so a rerun shows e
 
 No text is ever requested from an image model. Subtitles and the end card are generated in `subtitles.ts` as one ASS file and burned in at assembly. Subtitles are at most two lines of 40 characters, and the vertical export keeps them above the area a phone app covers with its own buttons.
 
+## Story to storyboard, and the page
+
+`lib/draft.ts` turns a few sentences into a draft storyboard. The split of work is deliberate: the text model proposes only the creative parts (shots, reasons, narration, prompts, a named camera move per shot), and code decides everything mechanical (shot ids, seeds, pan-and-zoom numbers, the end card, rescaling durations into the time budget). The assembled draft goes through the same validator as every stage, and if it fails, the validator's errors are sent back to the model for up to two repair rounds. Each attempt is a logged model call.
+
+`pipeline/ui/server.ts` is a small local web server with one page. It holds no pipeline logic: saving goes through the validator, drafting calls `lib/draft.ts`, and a run starts the same `pipeline/run.ts` command the terminal uses, as a child process whose output is streamed to the page. It listens on 127.0.0.1 only, accepts only the `film` and `radio` commands with pattern-checked arguments, and serves files only from `outputs/`.
+
 ## Tests
 
 `npm test` covers what can be tested without a model: the committed storyboard validates, broken storyboards are rejected for the right reason, the cache key is stable, a prompt change touches only its own shot, and subtitle cues obey the line and timing rules. Setting `PIPELINE_OUTPUT_DIR` and `PIPELINE_RUNS_FILE` points the stages at a throwaway folder, which is how the FFmpeg stages were dry-run on test tones before any real media existed.

@@ -56,7 +56,7 @@ export async function runSmoke(): Promise<void> {
       model: models.image.model,
       run: async () => {
         const file = join(dir, "image.bin");
-        const request = { model: models.image.model, prompt: "A single piece of white chalk on a wooden desk, gouache illustration, warm light", width: 512, height: 512, seed: 1, steps: models.image.steps };
+        const request = { model: models.image.model, prompt: "A small clay coffee cup on a wooden table, gouache illustration, warm light", width: 512, height: 512, seed: 1, steps: models.image.steps };
         const bytes = await callModel({ stage: "smoke", provider: "cloudflare", model: models.image.model, shot: "image", seed: 1, params: request, output: rel(file) }, async () => {
           const result = await cloudflareImage(request);
           writeFileSync(file, result.image);

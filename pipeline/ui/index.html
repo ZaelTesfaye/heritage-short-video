@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heritage Short studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Ethiopic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --table: #E6ECEE;      /* the light table everything sits on */
+    --sheet: #FAFCFC;      /* paper panels */
+    --ink: #14212E;
+    --soft: #56687A;
+    --line: #C5D1D6;
+    --teal: #1D6B68;       /* actions */
+    --teal-deep: #134C4A;
+    --marigold: #F0B429;   /* the grease-pencil mark: selection only */
+    --alarm: #B4371F;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Instrument Sans", "Noto Sans Ethiopic", "Nyala", "Ebrima", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--table); }
+  body { margin: 0; color: var(--ink); font: 400 16px/1.5 var(--body); }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--marigold); outline-offset: 2px; }
+
+  .top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; padding: 28px clamp(16px, 4vw, 48px) 18px; }
+  .top h1 { font-size: clamp(1.9rem, 4.6vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em; max-width: 18ch; }
+  .top p { margin: 6px 0 0; color: var(--soft); max-width: 60ch; }
+  .status { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 5px 11px; border-radius: 99px; background: var(--sheet); border: 1px solid var(--line); font-size: 0.86rem; }
+  .chip.bad { border-color: var(--alarm); color: var(--alarm); }
+  .chip.good { border-color: var(--teal); color: var(--teal-deep); }
+
+  /* The film strip: one frame per shot, as wide as the shot is long. */
+  .strip-wrap { padding: 0 clamp(16px, 4vw, 48px); overflow-x: auto; }
+  .strip { display: flex; gap: 3px; min-width: 760px; padding: 16px 10px; background: var(--ink); border-radius: 6px;
+    background-image: radial-gradient(circle, var(--table) 3px, transparent 3.5px), radial-gradient(circle, var(--table) 3px, transparent 3.5px);
+    background-size: 22px 10px, 22px 10px; background-position: 4px 3px, 4px calc(100% - 3px); background-repeat: repeat-x; }
+  .frame { position: relative; height: 104px; min-width: 44px; padding: 0; border: 0; border-radius: 3px; cursor: pointer; overflow: hidden;
+    background: #2B3B4C center/cover; color: #fff; text-align: left; }
+  .frame span { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 7px 5px; font-size: 0.78rem; font-weight: 600;
+    background: linear-gradient(transparent, rgba(8,14,22,.85)); }
+  .frame[aria-pressed="true"] { box-shadow: inset 0 0 0 4px var(--marigold); }
+  .frame.card { background: #0D1620; cursor: default; }
+  .budget { margin: 8px clamp(16px, 4vw, 48px) 0; color: var(--soft); font-size: 0.92rem; }
+  .budget.bad { color: var(--alarm); font-weight: 600; }
+
+  .work { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); gap: 22px; padding: 22px clamp(16px, 4vw, 48px) 60px; align-items: start; }
+  @media (max-width: 900px) { .work { grid-template-columns: minmax(0, 1fr); } }
+  .sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 20px; }
+  .sheet + .sheet { margin-top: 18px; }
+  .sheet h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+  .sheet > p.lead { margin: 0 0 14px; color: var(--soft); max-width: 68ch; }
+
+  label { display: block; font-weight: 600; font-size: 0.92rem; margin: 14px 0 5px; }
+  label small { font-weight: 400; color: var(--soft); }
+  input[type=text], input[type=number], select, textarea { width: 100%; padding: 9px 11px; background: #fff; border: 1px solid var(--line); border-radius: 4px; }
+  textarea { resize: vertical; min-height: 64px; line-height: 1.45; }
+  textarea.speech { font-size: 1.08rem; line-height: 1.7; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  @media (max-width: 560px) { .pair { grid-template-columns: 1fr; } }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .checks label { display: flex; align-items: center; gap: 7px; margin: 0; font-weight: 400; }
+
+  .btn { padding: 10px 18px; border: 0; border-radius: 4px; background: var(--teal); color: #fff; font-weight: 600; cursor: pointer; }
+  .btn:hover { background: var(--teal-deep); }
+  .btn.quiet { background: transparent; color: var(--teal-deep); box-shadow: inset 0 0 0 1.5px var(--teal); }
+  .btn.quiet:hover { background: #DFEDEC; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+  .note { color: var(--soft); font-size: 0.9rem; }
+  .problems { margin: 14px 0 0; padding: 12px 14px 12px 30px; border-left: 4px solid var(--alarm); background: #FBEDE9; border-radius: 0 4px 4px 0; }
+  .problems:empty { display: none; }
+
+  details { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 12px; }
+  summary { cursor: pointer; font-family: var(--display); font-weight: 700; font-size: 1.1rem; }
+
+  .still { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 12px; }
+  .still img { width: 100%; border-radius: 4px; display: block; background: #D5DEE2; }
+  .still figure { margin: 0; } .still figcaption { font-size: 0.82rem; color: var(--soft); margin-top: 3px; }
+
+  pre.log { margin: 14px 0 0; padding: 12px; height: 240px; overflow: auto; background: var(--ink); color: #D8E4E8; border-radius: 4px; font: 0.8rem/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; }
+  pre.log:empty::before { content: "Nothing has run yet in this session."; color: #7E93A3; }
+  video { width: 100%; max-height: 460px; background: #000; border-radius: 4px; display: block; }
+  .films figure { margin: 14px 0 0; } .films figcaption { font-size: 0.88rem; color: var(--soft); margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin-top: 10px; }
+  th, td { text-align: left; padding: 5px 8px 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; }
+  td.hit { color: var(--soft); } td.call { color: var(--teal-deep); font-weight: 600; } td.err { color: var(--alarm); font-weight: 600; }
+  .scroll { max-height: 300px; overflow: auto; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <h1 id="title">Heritage Short studio</h1>
+    <p id="logline">Tell a family story, check every shot, then make the film.</p>
+  </div>
+  <div class="status" id="status" aria-live="polite"></div>
+</header>
+
+<div class="strip-wrap"><div class="strip" id="strip" role="group" aria-label="Shots, in order. Each frame is as wide as the shot is long."></div></div>
+<p class="budget" id="budget"></p>
+
+<main class="work">
+  <div>
+    <section class="sheet" id="editor" aria-live="polite"></section>
+
+    <section class="sheet">
+      <h2>Start from a story</h2>
+      <p class="lead">Write what happened in your own words. A draft storyboard comes back for you to check. Nothing is generated from it until you save it and press a button on the right.</p>
+      <label for="story">The story</label>
+      <textarea id="story" rows="5" placeholder="My grandmother raised six children in Dessie selling injera at the market. She woke at four every morning to bake…"></textarea>
+      <div class="pair">
+        <div><label for="audience">Who is it for? <small>optional</small></label><input type="text" id="audience" placeholder="My cousins abroad"></div>
+        <div><label for="intent">What should they feel at the end? <small>optional</small></label><input type="text" id="intent" placeholder="How strong she was"></div>
+      </div>
+      <label>Narration languages <small>the first one ticked is the main one</small></label>
+      <div class="checks" id="draft-langs"></div>
+      <div class="row">
+        <button class="btn" id="draft">Draft storyboard</button>
+        <span class="note" id="draft-note"></span>
+      </div>
+    </section>
+
+    <section class="sheet">
+      <h2>The whole film</h2>
+      <p class="lead">Settings shared by every shot.</p>
+      <div class="pair">
+        <div><label for="f-title">Title</label><input type="text" id="f-title" data-path="title"></div>
+        <div><label for="f-voice">Narrator voice</label><input type="text" id="f-voice" data-path="narration.voice"></div>
+      </div>
+      <label for="f-audience">Who it is for</label><input type="text" id="f-audience" data-path="meta.audience">
+      <label for="f-intent">What they should feel at the end</label><input type="text" id="f-intent" data-path="meta.intent">
+      <label for="f-style">The look <small>added to every picture description</small></label><textarea id="f-style" data-path="style.style_block"></textarea>
+      <label for="f-delivery">How the narrator speaks</label><input type="text" id="f-delivery" data-path="narration.style">
+      <label for="f-music">The music</label><textarea id="f-music" data-path="music.caption"></textarea>
+    </section>
+  </div>
+
+  <aside>
+    <section class="sheet">
+      <h2>Make it</h2>
+      <p class="lead">Only what changed since the last run is generated again.</p>
+      <div class="pair">
+        <div><label for="run-lang">Narration language</label><select id="run-lang"></select></div>
+        <div><label for="run-aspect">Shape</label><select id="run-aspect"><option value="both">Vertical and horizontal</option><option value="vertical">Vertical only</option><option value="horizontal">Horizontal only</option></select></div>
+      </div>
+      <div class="checks" style="margin-top:14px"><label><input type="checkbox" id="run-force"> Regenerate everything, ignoring saved results</label></div>
+      <div class="row">
+        <button class="btn quiet" id="run-radio">Make radio cut</button>
+        <button class="btn" id="run-film">Make film</button>
+      </div>
+      <p class="note" id="run-note"></p>
+      <pre class="log" id="log" aria-live="polite"></pre>
+    </section>
+
+    <section class="sheet films">
+      <h2>Watch</h2>
+      <div id="films"><p class="note">No film yet. The radio cut, sound only, is the quickest thing to make first.</p></div>
+    </section>
+
+    <section class="sheet">
+      <h2>What the last runs did</h2>
+      <p class="lead">One line per model call or reused result, newest first.</p>
+      <div class="scroll"><table id="runs"></table></div>
+    </section>
+  </aside>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, props = {}, ...kids) => { const n = Object.assign(document.createElement(tag), props); n.append(...kids); return n; };
+let sb = null, selected = 0, dirty = false, server = {}, names = {};
+
+async function api(path, body) {
+  const res = await fetch(path, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  return { ok: res.ok, status: res.status, data: await res.json() };
+}
+const get = (obj, path) => path.split(".").reduce((o, k) => o?.[k], obj);
+const set = (obj, path, value) => { const keys = path.split("."); const last = keys.pop(); keys.reduce((o, k) => o[k], obj)[last] = value; };
+const langName = (code) => names[code] ?? code;
+const stillFor = (shotId, aspect) => server.keyframes?.find((k) => k.path === `keyframes/${aspect}/${shotId}.png`);
+
+function markDirty() { dirty = true; renderStatus(); renderStrip(); }
+
+function renderStatus() {
+  const chips = [];
+  const problems = server.validation?.errors?.length ?? 0;
+  if (!sb) chips.push(["No storyboard yet", "bad"]);
+  else if (dirty) chips.push(["Unsaved changes", "bad"]);
+  else chips.push(problems ? [`${problems} problem${problems > 1 ? "s" : ""} in the storyboard`, "bad"] : ["Storyboard is valid", "good"]);
+  chips.push(server.keys?.gemini ? ["Narration key found", "good"] : ["No GEMINI_API_KEY in .env", "bad"]);
+  chips.push(server.keys?.cloudflare ? ["Picture keys found", "good"] : ["No Cloudflare keys in .env", "bad"]);
+  $("status").replaceChildren(...chips.map(([text, kind]) => el("span", { className: `chip ${kind}`, textContent: text })));
+  const busy = !!server.running;
+  $("run-film").disabled = $("run-radio").disabled = busy || dirty || !sb;
+  $("run-note").textContent = busy ? "Running. The log below updates as each step finishes." : dirty ? "Save your changes before making anything." : "";
+}
+
+function renderStrip() {
+  if (!sb) { $("strip").replaceChildren(); $("budget").textContent = ""; return; }
+  const frames = sb.shots.map((shot, i) => {
+    const still = stillFor(shot.id, "vertical") ?? stillFor(shot.id, "horizontal");
+    const frame = el("button", { className: "frame", type: "button", title: shot.reason }, el("span", { textContent: `${shot.id}  ${shot.duration_s}s` }));
+    frame.style.flex = `${shot.duration_s} 0 0`;
+    if (still) frame.style.backgroundImage = `url("${still.url}")`;
+    frame.setAttribute("aria-pressed", String(i === selected));
+    frame.onclick = () => { selected = i; renderStrip(); renderEditor(); };
+    return frame;
+  });
+  const card = el("div", { className: "frame card", title: sb.end_card.lines.join(" ") }, el("span", { textContent: "Made with AI" }));
+  card.style.flex = `${sb.end_card.duration_s} 0 0`;
+  $("strip").replaceChildren(...frames, card);
+
+  const total = sb.shots.reduce((sum, s) => sum + Number(s.duration_s || 0), 0) + sb.end_card.duration_s;
+  const { min, max } = sb.meta.target_duration_s;
+  const within = total >= min && total <= max;
+  $("budget").className = `budget${within ? "" : " bad"}`;
+  $("budget").textContent = `${sb.shots.length} shots and the end card, ${total.toFixed(1)} seconds planned. The film must run ${min} to ${max} seconds${within ? "." : ", so change some shot lengths."} A shot grows by itself if its narration is longer than planned.`;
+}
+
+function field(labelText, hint, input) {
+  const id = `e-${Math.random().toString(36).slice(2, 8)}`;
+  input.id = id;
+  const label = el("label", { htmlFor: id, textContent: labelText + " " });
+  if (hint) label.append(el("small", { textContent: hint }));
+  return [label, input];
+}
+
+function renderEditor() {
+  const box = $("editor");
+  if (!sb) {
+    box.replaceChildren(el("h2", { textContent: "No storyboard yet" }), el("p", { className: "lead", textContent: "Write your story below and draft one." }));
+    return;
+  }
+  const shot = sb.shots[selected];
+  const bind = (node, read, write) => { node.value = read() ?? ""; node.oninput = () => { write(node.value); markDirty(); }; return node; };
+  const parts = [
+    el("h2", { textContent: `Shot ${selected + 1} of ${sb.shots.length}` }),
+    el("p", { className: "lead", textContent: "Change a line here, save, and only this shot is made again." }),
+    ...field("Why this shot exists", "if you cannot say, cut the shot", bind(el("textarea"), () => shot.reason, (v) => (shot.reason = v))),
+  ];
+  for (const { code } of sb.meta.languages) {
+    parts.push(...field(`Narration in ${langName(code)}`, "", bind(el("textarea", { className: "speech", lang: code }), () => shot.narration[code], (v) => (shot.narration[code] = v))));
+  }
+  parts.push(...field("English subtitle", "shown on screen while the line is spoken", bind(el("textarea"), () => shot.subtitle, (v) => (shot.subtitle = v))));
+  parts.push(...field("What the picture shows", "never ask for words or signs in the picture", bind(el("textarea", { rows: 4 }), () => shot.image_prompt, (v) => (shot.image_prompt = v))));
+
+  const length = bind(el("input", { type: "number", min: 2, max: 15, step: 0.5 }), () => shot.duration_s, (v) => (shot.duration_s = Number(v)));
+  const mode = el("select", {}, el("option", { value: "kenburns", textContent: "Slow pan and zoom over the picture" }), el("option", { value: "i2v", textContent: "Video clip if one exists, else pan and zoom" }));
+  mode.value = shot.motion.mode; mode.onchange = () => { shot.motion.mode = mode.value; markDirty(); };
+  const pair = el("div", { className: "pair" }, el("div", {}, ...field("Planned length in seconds", "", length)), el("div", {}, ...field("Movement", "", mode)));
+  parts.push(pair);
+  parts.push(...field("How it moves", "movement and camera only", bind(el("textarea"), () => shot.motion.prompt, (v) => (shot.motion.prompt = v))));
+
+  const stills = ["vertical", "horizontal"].map((a) => [a, stillFor(shot.id, a)]).filter(([, s]) => s);
+  if (stills.length) {
+    parts.push(el("div", { className: "still" }, ...stills.map(([aspect, s]) => el("figure", {}, el("img", { src: s.url, alt: `Generated picture for ${shot.id}, ${aspect}`, loading: "lazy" }), el("figcaption", { textContent: aspect })))));
+  }
+
+  const problems = el("ul", { className: "problems", id: "problems" });
+  const save = el("button", { className: "btn", type: "button", textContent: "Save storyboard" });
+  save.onclick = saveStoryboard;
+  const again = el("button", { className: "btn quiet", type: "button", textContent: `Make only ${shot.id} again` });
+  again.onclick = () => run("film", { only: shot.id, force: true });
+  again.disabled = dirty || !!server.running;
+  parts.push(el("div", { className: "row" }, save, again), problems);
+  box.replaceChildren(...parts);
+}
+
+function renderGlobals() {
+  document.querySelectorAll("[data-path]").forEach((node) => {
+    node.value = sb ? get(sb, node.dataset.path) ?? "" : "";
+    node.disabled = !sb;
+    node.oninput = () => { set(sb, node.dataset.path, node.value); markDirty(); if (node.dataset.path === "title") $("title").textContent = node.value; };
+  });
+  $("title").textContent = sb?.title ?? "Heritage Short studio";
+  if (sb?.logline) $("logline").textContent = sb.logline;
+  const langs = sb?.meta.languages ?? [];
+  const current = $("run-lang").value;
+  $("run-lang").replaceChildren(...langs.map((l) => el("option", { value: l.code, textContent: langName(l.code) })));
+  if (langs.some((l) => l.code === current)) $("run-lang").value = current;
+}
+
+function renderDraftLangs() {
+  if ($("draft-langs").children.length) return;
+  const preset = sb?.meta.languages.map((l) => l.code) ?? ["am", "en"];
+  $("draft-langs").replaceChildren(...Object.entries(names).map(([code, name]) => {
+    const box = el("input", { type: "checkbox", value: code, checked: preset.includes(code) });
+    return el("label", {}, box, name);
+  }));
+}
+
+function renderFilms() {
+  const items = [...(server.films ?? []), ...(server.radio ?? [])];
+  if (!items.length) return;
+  $("films").replaceChildren(...items.map((item) => {
+    const video = el("video", { controls: true, preload: "metadata", src: item.url });
+    return el("figure", {}, video, el("figcaption", { textContent: `${item.path} (${(item.bytes / 1048576).toFixed(1)} MB)` }));
+  }));
+}
+
+async function renderRuns() {
+  const { data } = await api("/api/runs");
+  if (!data.length) { $("runs").replaceChildren(el("caption", { className: "note", textContent: "No calls logged yet." })); return; }
+  const head = el("tr", {}, ...["Step", "Shot", "What happened", "Model", "Seconds"].map((t) => el("th", { textContent: t })));
+  const words = { model_call: "Called the model", cache_hit: "Reused", local_render: "Rendered locally", fallback: "Used the fallback", remote_ingest: "Ran on Kaggle" };
+  const rows = data.map((r) => {
+    const what = r.status === "error" ? `Failed, attempt ${r.attempt ?? 1}` : words[r.event] ?? r.event;
+    const kind = r.status === "error" ? "err" : r.event === "cache_hit" ? "hit" : r.event === "model_call" ? "call" : "";
+    return el("tr", {}, el("td", { textContent: r.stage }), el("td", { textContent: [r.shot, r.lang, r.aspect].filter(Boolean).join(" ") }), el("td", { className: kind, textContent: what, title: r.error ?? r.note ?? "" }), el("td", { textContent: r.model === "-" ? "" : r.model }), el("td", { textContent: (r.latency_ms / 1000).toFixed(1) }));
+  });
+  $("runs").replaceChildren(head, ...rows);
+}
+
+async function refresh(keepEdits = false) {
+  server = (await api("/api/state")).data;
+  names = server.language_names;
+  if (!keepEdits) { sb = server.storyboard; dirty = false; selected = Math.min(selected, (sb?.shots.length ?? 1) - 1); }
+  $("log").textContent = (server.log ?? []).join("\n");
+  renderStatus(); renderStrip(); renderGlobals(); renderEditor(); renderDraftLangs(); renderFilms(); renderRuns();
+}
+
+async function saveStoryboard() {
+  const { ok, data } = await api("/api/storyboard", sb);
+  if (!ok) {
+    const list = $("problems");
+    list.replaceChildren(...(data.errors ?? [data.error]).map((e) => el("li", { textContent: e })));
+    list.scrollIntoView({ block: "nearest" });
+    return;
+  }
+  await refresh();
+}
+
+async function run(command, extra = {}) {
+  const body = { command, lang: $("run-lang").value, aspect: $("run-aspect").value, force: $("run-force").checked, ...extra };
+  const { ok, data } = await api("/api/run", body);
+  if (!ok) { $("run-note").textContent = data.error; return; }
+  $("log").textContent = "";
+  server.running = true; renderStatus(); renderEditor();
+}
+
+$("run-film").onclick = () => run("film");
+$("run-radio").onclick = () => run("radio");
+$("draft").onclick = async () => {
+  const languages = [...document.querySelectorAll("#draft-langs input:checked")].map((b) => b.value);
+  const note = $("draft-note");
+  if (dirty && !confirm("The draft replaces your unsaved changes on this page. Continue?")) return;
+  $("draft").disabled = true; note.textContent = "Drafting. This usually takes under a minute.";
+  const { ok, data } = await api("/api/draft", { story: $("story").value, audience: $("audience").value, intent: $("intent").value, languages });
+  $("draft").disabled = false;
+  if (!ok) { note.textContent = data.error; return; }
+  sb = data.storyboard; selected = 0; dirty = true;
+  note.textContent = data.errors.length ? `Drafted, with ${data.errors.length} problem(s) to fix before it can be saved.` : "Drafted. Read every shot, then save. Your saved storyboard is unchanged until you do.";
+  renderStatus(); renderStrip(); renderGlobals(); renderEditor();
+  if (data.errors.length) $("problems").replaceChildren(...data.errors.map((e) => el("li", { textContent: e })));
+  $("editor").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+};
+
+const events = new EventSource("/api/events");
+events.addEventListener("log", (e) => { const log = $("log"); log.textContent += (log.textContent ? "\n" : "") + JSON.parse(e.data); log.scrollTop = log.scrollHeight; });
+events.addEventListener("done", (e) => { const { code } = JSON.parse(e.data); refresh(dirty).then(() => { $("run-note").textContent = code === 0 ? "Finished." : "Stopped with an error. The last lines of the log say why."; }); });
+window.addEventListener("beforeunload", (e) => { if (dirty) e.preventDefault(); });
+
+refresh();
+</script>
+</body>
+</html>

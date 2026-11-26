@@ -53,6 +53,8 @@ npm run smoke
 | `npm run validate` | Check `storyboard.json` against the schema and the cross-field rules |
 | `npm run smoke` | Call each provider once and log its latency |
 | `npm run script` | Report narration length per language against the 60–90 second budget |
+| `npm run script -- --from story.txt --langs am,en` | Draft a whole storyboard from a story in a text file, for review |
+| `npm run ui` | Open the same pipeline as a local web page |
 | `npm run costs` | Summarise `runs.jsonl` into latency, GPU minutes and list-price cost per stage |
 | `npm test` | Unit tests for the contract, the cache key and the subtitles |
 
@@ -76,6 +78,16 @@ npm run film
 ```
 
 Every other shot is reported as `cached`, and `runs.jsonl` gains one `model_call` line per changed output and a `cache_hit` line for everything else. The lines of one command share a `run_id`.
+
+## Making a film of your own story
+
+The pipeline knows nothing about this particular film. Everything about it is in `storyboard.json`, so a different storyboard makes a different film. There are three ways to get one:
+
+1. **Write it by hand**, following [schema/storyboard.schema.json](schema/storyboard.schema.json).
+2. **Draft it from a story.** Put a few sentences in a text file and run `npm run script -- --from story.txt --langs am,en`. A text model proposes the shots, narration and prompts; code adds the ids, seeds and camera moves and validates the result. The draft is written to `storyboard.draft.json` so nothing is overwritten. Read it, correct it, then rename it to `storyboard.json`.
+3. **Use the page.** `npm run ui` starts a local page at http://localhost:4173 with the same steps: write the story, review each shot, save, make the radio cut or the film, and watch the result. It serves only your own machine and runs the same commands as the terminal.
+
+A draft is a starting point. The model is told to use only the facts in the story, but it is a real person's story, so every line should be read before anything is generated.
 
 ## How it is built
 

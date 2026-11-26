@@ -2,9 +2,12 @@
 // translation of the narration into another language for a native speaker to review.
 //   npm run script                      timing report
 //   npm run script -- --translate ti    draft narration for language code "ti" from the English lines
+//   npm run script -- --from story.txt --langs am,en    draft a whole storyboard from a story (add --write to replace storyboard.json)
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
-import { isMain, loadConfig, runMain } from "./lib/env.ts";
+import { join } from "node:path";
+import { ROOT, isMain, loadConfig, rel, runMain } from "./lib/env.ts";
+import { LANGUAGE_NAMES, draftStoryboard } from "./lib/draft.ts";
 import { wavDuration } from "./lib/ffmpeg.ts";
 import { geminiText } from "./lib/gemini.ts";
 import { callModel } from "./lib/model.ts";
@@ -41,7 +44,7 @@ async function translate(sb: Storyboard, code: string, name: string): Promise<vo
   for (const shot of sb.shots) {
     if (shot.narration[code]?.trim()) continue;
     const prompt =
-      `Translate this line of film narration from English into ${name}. It is spoken by a family member about their aunt, a teacher. ` +
+      `Translate this line of film narration from English into ${name}. The film: ${sb.logline ?? sb.title}. ` +
       `Keep it short, natural and warm, written for the ear. Reply with the translation only, no quotes and no notes.\n\n${shot.narration.en}`;
     shot.narration[code] = await callModel({ stage: "script", provider: "gemini", model, shot: shot.id, lang: code, params: { task: "translate", from: "en", to: code, prompt } }, async () => {
       const result = await geminiText({ model, prompt });
@@ -57,11 +60,22 @@ async function translate(sb: Storyboard, code: string, name: string): Promise<vo
 }
 
 export async function runScript(argv: string[] = process.argv.slice(2)): Promise<void> {
-  const { values } = parseArgs({ args: argv, options: { translate: { type: "string" }, name: { type: "string" } } });
+  const { values } = parseArgs({ args: argv, options: { translate: { type: "string" }, name: { type: "string" }, from: { type: "string" }, langs: { type: "string" }, write: { type: "boolean", default: false } } });
+  if (values.from) {
+    // Story in, draft storyboard out. Written beside the real one unless --write is given, so nothing is lost.
+    const languages = (values.langs ?? "am,en").split(",").map((code) => code.trim());
+    const { storyboard, errors, attempts } = await draftStoryboard({ story: readFileSync(values.from, "utf8"), languages });
+    const target = values.write && !errors.length ? STORYBOARD_FILE : join(ROOT, "storyboard.draft.json");
+    writeFileSync(target, JSON.stringify(storyboard, null, 2) + "\n");
+    console.log(`[script] drafted ${storyboard.shots.length} shots in ${attempts} attempt(s) -> ${rel(target)}`);
+    for (const error of errors) console.log(`[script]   still invalid: ${error}`);
+    console.log("[script] Read every shot before generating anything: the draft may have added details the story did not contain.");
+    if (target !== STORYBOARD_FILE) return;
+  }
   if (values.translate) {
     // Read the raw file here: a language that is only half translated would not pass validation yet.
     const sb = JSON.parse(readFileSync(STORYBOARD_FILE, "utf8")) as Storyboard;
-    await translate(sb, values.translate, values.name ?? values.translate);
+    await translate(sb, values.translate, values.name ?? LANGUAGE_NAMES[values.translate] ?? values.translate);
   }
   report(loadStoryboard());
 }

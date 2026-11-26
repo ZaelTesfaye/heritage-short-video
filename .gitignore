@@ -9,3 +9,6 @@ outputs/tmp/
 
 .DS_Store
 Thumbs.db
+
+# Drafts from the story-to-storyboard step, kept out until reviewed.
+storyboard.draft.json
